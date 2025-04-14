@@ -1,0 +1,34 @@
+/* SliderProv.module.css */
+
+/* Definir la animación para el desplazamiento de los logos */
+@keyframes scrollMarquee {
+    0% {
+      transform: translateX(0); /* Comienza en la posición original */
+    }
+    100% {
+      transform: translateX(-50%); /* Mueve a la izquierda hasta que toda la lista se haya desplazado */
+    }
+  }
+  
+  .marquee-container {
+    display: flex;
+    overflow: hidden; /* Ocultar el contenido fuera del contenedor */
+    width: 100%;
+  }
+  
+  .marquee-wrapper {
+    display: flex;
+    animation: scrollMarquee 20s linear infinite; /* Desplazamiento continuo */
+  }
+  
+  .marquee-item {
+    flex-shrink: 0;
+    margin-right: 30px; /* Espaciado entre logos */
+    transition: transform 0.3s ease-in-out; /* Efecto suave al hacer hover */
+  }
+  
+  /* Efecto hover para el logo */
+  .marquee-item:hover {
+    transform: scale(1.1); /* Aumenta el tamaño del logo en hover */
+  }
+  
