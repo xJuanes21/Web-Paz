@@ -25,10 +25,11 @@
     flex-shrink: 0;
     margin-right: 30px; /* Espaciado entre logos */
     transition: transform 0.3s ease-in-out; /* Efecto suave al hacer hover */
+    padding: 10px;
   }
   
   /* Efecto hover para el logo */
   .marquee-item:hover {
-    transform: scale(1.1); /* Aumenta el tamaño del logo en hover */
+    transform: scale(1.05); /* Aumenta el tamaño del logo en hover */
   }
   

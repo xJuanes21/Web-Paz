@@ -34,7 +34,7 @@ export const logosHumanos: Logo[] = [
         alt: "pisa"
     },
     {
-        path: "/assets/logos/human/sanjorge.png",
+        path: "/assets/logos/human/logosanjorge.png",
         alt: "sanjorge"
     },
     {

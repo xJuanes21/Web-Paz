@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-[750px] overflow-hidden">
       {/* Contenedor de la imagen de fondo */}
       <div className="absolute inset-0 bg-[url('/assets/img-hero.jpg')] bg-cover bg-center bg-fixed"></div>
       <div className="absolute inset-0 bg-black/50"></div>

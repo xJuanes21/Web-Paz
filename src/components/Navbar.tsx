@@ -60,7 +60,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8 font-open">
             <a href="#" className="text-red-600 hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
