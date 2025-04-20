@@ -61,10 +61,10 @@ const Mission = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               <p>
-                Colombo Farmacéutica S.A.S es una empresa que brinda productos farmacéuticos, medicinales, 
-                cosméticos, insumos hospitalarios y artículos de tocador, facilitando soluciones a las 
-                necesidades de la comunidad, con calidad, eficiencia y trabajo en equipo, enfocadas al 
-                bienestar y satisfacción de nuestros clientes, con un equipo humano calificado, responsable y 
+                Colombo Farmacéutica S.A.S es una empresa que brinda productos farmacéuticos, medicinales,
+                cosméticos, insumos hospitalarios y artículos de tocador, facilitando soluciones a las
+                necesidades de la comunidad, con calidad, eficiencia y trabajo en equipo, enfocadas al
+                bienestar y satisfacción de nuestros clientes, con un equipo humano calificado, responsable y
                 competente, generando desarrollo económico y social a nuestra región.
               </p>
             </motion.div>
@@ -73,10 +73,10 @@ const Mission = () => {
 
         {/* Right Image Section */}
         <div className="md:w-1/2 relative h-screen md:h-auto">
-          <div 
-            className="absolute inset-0 bg-no-repeat bg-cover" 
+          <div
+            className="absolute inset-0 bg-no-repeat bg-center bg-cover"
             style={{
-              backgroundImage: `url('/assets/img-section.jpeg')`,
+              backgroundImage: `url('/assets/img-bodega.jpg')`,
               backgroundAttachment: "fixed"
             }}
             aria-hidden="true"

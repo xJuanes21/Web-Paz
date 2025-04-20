@@ -56,7 +56,7 @@ export default function Navbar() {
           <div className="flex-shrink-0 flex items-center">
             <div className="h-8 w-32 rounded flex items-center justify-center text-white font-bold">
               <Link  href="/" >
-              <Image src="/assets/logo-negro.png" alt="Logo" width={64} height={64} />
+              <Image src="/assets/logo-negro.png" alt="Logo" width={90} height={90} />
               </Link>
             </div>
           </div>

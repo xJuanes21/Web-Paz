@@ -36,9 +36,9 @@ const Vision = () => {
         {/* Right Image Section */}
         <div className="md:w-1/2 relative h-screen md:h-auto">
           <div 
-            className="absolute inset-0 bg-no-repeat bg-cover" 
+            className="absolute inset-0 bg-no-repeat bg-center bg-cover " 
             style={{
-              backgroundImage: `url('/assets/img-section.jpeg')`,
+              backgroundImage: `url('/assets/img-oficinas.jpg')`,
               backgroundAttachment: "fixed"
             }}
             aria-hidden="true"
