@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Hero />
       <SliderProv /> 
-      <div className="relative w-full  overflow-hidden bg-gradient-to-br from-rose-900 via-red-600 to-orange-600 flex items-center justify-center">
+      <div className="relative w-full  overflow-hidden bg-gradient-to-br from-[#561A16] via-[#C6441C]  to-[#D4741C] flex items-center justify-center">
         <About />
       </div>
       <Mission  />

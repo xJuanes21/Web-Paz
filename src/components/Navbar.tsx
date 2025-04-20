@@ -47,33 +47,33 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`bg-orange-600 bg-opacity-90 shadow-md fixed w-full z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
+      className={`bg-gradient-to-l from-[#561A16] via-[#C6441C] to-[#D4741C]  to-white shadow-md fixed w-full z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
         }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="container    px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <div className="h-8 w-32 rounded flex items-center justify-center text-white font-bold">
               <Link  href="/" >
-              <Image src="/assets/logo-negro.png" alt="Logo" width={90} height={90} />
+              <Image src="/assets/logo-colores.png" alt="Logo" width={80} height={80} />
               </Link>
             </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8 font-open">
-            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="#" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
-            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="#" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Servicios
             </a>
-            <a href="/labs" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="/labs" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Laboratorios
             </a>
-            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
-              Contacto
+            <a href="/" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              Inicio
             </a>
           </div>
 
@@ -116,10 +116,10 @@ export default function Navbar() {
               Laboratorios
             </a>
             <a
-              href="#"
+              href="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
             >
-              Contacto
+              Inicio
             </a>
           </div>
         </div>

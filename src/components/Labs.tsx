@@ -40,8 +40,8 @@ export default function Labs() {
     <div className="w-full px-4 md:px-8 lg:px-16 py-12 ">
       {/* Sección de logos humanos */}
       <div className="mb-10">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 relative inline-block">
-          Para Humanos
+        <h2 className="text-2xl font-bold mb-6 text-[#561A16] relative inline-block">
+          Línea Humanos
           <span className="absolute -bottom-1 left-0 w-1/3 h-1 bg-red-600 rounded-full"></span>
         </h2>
         
@@ -73,8 +73,8 @@ export default function Labs() {
 
       {/* Sección de logos veterinarios */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 relative inline-block">
-          Para Veterinaria
+        <h2 className="text-2xl font-bold mb-6 text-[#561A16] relative inline-block">
+          Línea Veterinaria
           <span className="absolute -bottom-1 left-0 w-1/3 h-1 bg-red-600 rounded-full"></span>
         </h2>
         

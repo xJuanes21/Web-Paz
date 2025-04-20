@@ -22,8 +22,8 @@ export default function Page() {
 
   return (
     <div className="w-full pt-18 py-8  bg-gradient-to-br from-white via-white to-orange-600">
-      <h1 className='text-4xl text-center font-bold mb-4 font-poppins'>Nuestros laboratorios</h1>
-      <p className='text-lg text-center font-open mb-8'>Conoce nuestros laboratorios, trabajamos con lo mejor de la industria de la salud y el bienestar. <br /> Nuestros productos son desarrollados con los mejores estandares de calidad y basados en la ultima investigacion cientifica</p>
+      <h1 className='text-4xl text-center text-[#561A16] font-bold mb-4 font-poppins'>Nuestros laboratorios</h1>
+      <p className='text-lg text-center text-[#561A16] font-open mb-8'>Conoce nuestros laboratorios, trabajamos con lo mejor de la industria de la salud y el bienestar. <br /> Nuestros productos son desarrollados con los mejores estandares de calidad y basados en la ultima investigacion cientifica</p>
       <Labs />
     </div>
  
