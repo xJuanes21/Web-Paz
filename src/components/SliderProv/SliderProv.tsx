@@ -7,11 +7,11 @@ import Link from "next/link";
 
 export default function SliderProv() {
     return (
-        <div className="relative py-8 bg-black">
+        <div className="relative py-8 bg-orange-600">
             {/* Contenedor con gradiente para dar efecto de fade a los lados */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute left-0 w-32 h-full bg-gradient-to-r from-black to-transparent z-10"></div>
-                <div className="absolute right-0 w-32 h-full bg-gradient-to-l from-black to-transparent z-10"></div>
+                <div className="absolute left-0 w-32 h-full bg-gradient-to-r from-orange-600 to-transparent z-10"></div>
+                <div className="absolute right-0 w-32 h-full bg-gradient-to-l from-orange-600 to-transparent z-10"></div>
             </div>
 
             {/* Título de la sección */}

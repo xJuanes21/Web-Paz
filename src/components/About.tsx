@@ -40,7 +40,7 @@ const About = () => {
         <div className="flex justify-center mt-8">
           <TypingText
             title="| ¿Quiénes somos?"
-            textStyles="text-xl text-center font-poppins" // Aumenté el tamaño del texto
+            textStyles="text-center " // Aumenté el tamaño del texto
           />
         </div>
         <p className="text-xl sm:text-2xl mt-4 max-w-4xl mx-auto font-open">

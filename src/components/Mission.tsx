@@ -1,7 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
 const Mission = () => {
   const [isInView, setIsInView] = useState(false);
 
@@ -30,7 +29,7 @@ const Mission = () => {
   return (
     <section
       id="mission-section"
-      className="w-full min-h-screen bg-black overflow-hidden relative"
+      className="w-full min-h-screen bg-red-600 overflow-hidden relative"
     >
       <div className="flex flex-col md:flex-row h-[90vh] p-20">
         {/* Left Content Section */}

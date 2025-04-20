@@ -30,7 +30,7 @@ const Vision = () => {
   return (
     <section
       id="vision-section"
-      className="w-full min-h-screen bg-black overflow-hidden relative"
+      className="w-full min-h-screen bg-orange-600 overflow-hidden relative"
     >
       <div className="flex flex-col md:flex-row h-[90vh] p-20">
         {/* Right Image Section */}

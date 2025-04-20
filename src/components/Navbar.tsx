@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,23 +17,23 @@ export default function Navbar() {
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Si estamos al principio de la página, siempre mostramos la navbar
       if (currentScrollY < 100) {
         setIsVisible(true);
         setLastScrollY(currentScrollY);
         return;
       }
-      
+
       // Si estamos scrolleando hacia abajo, ocultamos la navbar
       if (currentScrollY > lastScrollY) {
         setIsVisible(false);
-      } 
+      }
       // Si estamos scrolleando hacia arriba, mostramos la navbar
       else {
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -45,39 +46,40 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   return (
-    <nav 
-      className={`bg-black bg-opacity-90 shadow-md fixed w-full z-50 transition-transform duration-300 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}
+    <nav
+      className={`bg-orange-600 bg-opacity-90 shadow-md fixed w-full z-50 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <div className="h-8 w-32 rounded flex items-center justify-center text-white font-bold">
-              <Image src="/assets/logoversiones-02.png" alt="Logo" width={64} height={64} />
+              <Link  href="/" >
+              <Image src="/assets/logo-negro.png" alt="Logo" width={64} height={64} />
+              </Link>
             </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8 font-open">
-            <a href="#" className="text-red-600 hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
-            <a href="#" className="text-red-600 hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Servicios
             </a>
-            <a href="#" className="text-red-600 hover:text-orange-600 px-3 py-2 font-medium transition-colors">
-              Nosotros
+            <a href="/labs" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              Laboratorios
             </a>
-            <a href="#" className="text-red-600 hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="#" className="text-black hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Contacto
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden">
-            <button 
+            <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-orange-600 focus:outline-none"
             >
@@ -95,26 +97,26 @@ export default function Navbar() {
       {isOpen && (
         <div className="lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-black bg-opacity-95">
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
             >
               Productos
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
             >
               Servicios
             </a>
-            <a 
-              href="#" 
+            <a
+              href="/labs"
               className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
             >
-              Nosotros
+              Laboratorios
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
             >
               Contacto
