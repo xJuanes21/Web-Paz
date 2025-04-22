@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 
 const FloatingButtons = ({ 
-  onWhatsAppClick, 
-  onEmailClick, 
-  onCallClick,
-  whatsappNumber = '+573173543906', // Número de WhatsApp por defecto
-  email = 'compras@colombofarmaceutica.com', // Email por defecto
-  phoneNumber = '3154484953' // Número de teléfono por defecto
+  onWhatsAppClick = () => window.open('https://wa.me/573173543906'), 
+  onEmailClick = () => window.location.href = 'mailto:compras@colombofarmaceutica.com', 
+  onCallClick = () => window.location.href = 'tel:3154484953',
+  whatsappNumber = '+573173543906',
+  email = 'compras@colombofarmaceutica.com',
+  phoneNumber = '3154484953'
 }) => {
   const [showButtons, setShowButtons] = useState(false);
 

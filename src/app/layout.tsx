@@ -9,12 +9,14 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
   variable: '--font-poppins',
+  subsets: ['latin']
 });
 
 const openSans = Open_Sans({
   weight: ['300', '400', '600', '700', '800'],
   style: ['normal', 'italic'],
   variable: '--font-open-sans',
+  subsets: ['latin']
 });
 
 
@@ -36,7 +38,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <FloatingButtons />
+        <FloatingButtons    />
         <Footer />
       </body>
     </html>
