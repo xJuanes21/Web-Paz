@@ -1,8 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
 
-const FloatingButtons = () => {
+const FloatingButtons = ({ 
+  onWhatsAppClick, 
+  onEmailClick, 
+  onCallClick,
+  whatsappNumber = '+573173543906', // Número de WhatsApp por defecto
+  email = 'compras@colombofarmaceutica.com', // Email por defecto
+  phoneNumber = '3154484953' // Número de teléfono por defecto
+}) => {
   const [showButtons, setShowButtons] = useState(false);
 
   // Configuración de las variantes de animación
@@ -25,12 +33,54 @@ const FloatingButtons = () => {
     }
   };
 
-  // Datos de los botones para facilitar la generación
+  // Funciones para manejar los clics si no se proporcionan handlers personalizados
+  const handleWhatsAppClick = () => {
+    if (onWhatsAppClick) {
+      onWhatsAppClick();
+    } else {
+      // Comportamiento predeterminado: abrir WhatsApp con el número proporcionado
+      window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`, '_blank');
+    }
+  };
+
+  const handleEmailClick = () => {
+    if (onEmailClick) {
+      onEmailClick();
+    } else {
+      // Comportamiento predeterminado: abrir el cliente de correo
+      window.location.href = `mailto:${email}`;
+    }
+  };
+
+  const handleCallClick = () => {
+    if (onCallClick) {
+      onCallClick();
+    } else {
+      // Comportamiento predeterminado: iniciar llamada
+      window.location.href = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
+    }
+  };
+
+  // Datos de los botones con sus respectivas acciones
   const buttons = [
-    { color: 'bg-orange-600',  icon: '💬' },
-    { color: 'bg-orange-600',  icon: '📌' },
-    { color: 'bg-orange-600',  icon: '📁' },
-    { color: 'bg-orange-600',  icon: '⚙️' },
+    { 
+      color: 'bg-[#D4741C]', 
+      icon: <MessageCircle className="h-5 w-5" />, 
+      label: 'WhatsApp',
+      onClick: handleWhatsAppClick
+    },
+    { 
+      color: 'bg-[#D4741C]', 
+      icon: <Mail className="h-5 w-5" />, 
+      label: 'Email',
+      onClick: handleEmailClick
+    },
+    { 
+      color: 'bg-[#D4741C]', 
+      icon: <Phone className="h-5 w-5" />, 
+      label: 'Llamar',
+      onClick: handleCallClick
+    },
   ];
 
   return (
@@ -53,13 +103,18 @@ const FloatingButtons = () => {
               {buttons.map((button, index) => (
                 <motion.button
                   key={index}
-                  className={`${button.color} hover:${button.hoverColor} w-12 h-12 rounded-full shadow-lg focus:outline-none flex items-center justify-center text-white`}
+                  className={`${button.color} w-12 h-12 rounded-full shadow-lg focus:outline-none flex items-center justify-center text-white relative group`}
                   variants={buttonVariants}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => console.log(`Botón ${index + 1} clickeado`)}
+                  onClick={button.onClick}
+                  aria-label={button.label}
                 >
-                  <span className="text-lg">{button.icon}</span>
+                  {button.icon}
+                  {/* Tooltip con el nombre del botón */}
+                  <span className="absolute right-16 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {button.label}
+                  </span>
                 </motion.button>
               ))}
             </motion.div>
@@ -68,9 +123,11 @@ const FloatingButtons = () => {
 
         {/* Botón principal */}
         <motion.button
-          className="bg-red-600 hover:bg-red-400 w-16 h-16 rounded-full shadow-lg focus:outline-none flex items-center justify-center text-white"
+          className="bg-[#C6441C] hover:bg-red-700 w-16 h-16 rounded-full shadow-lg focus:outline-none flex items-center justify-center text-white"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => setShowButtons(prev => !prev)} // También permite hacer clic para mostrar/ocultar
+          aria-label="Mostrar opciones de contacto"
         >
           <span className="text-2xl font-bold">+</span>
         </motion.button>
@@ -78,6 +135,5 @@ const FloatingButtons = () => {
     </div>
   );
 };
-
 
 export default FloatingButtons;

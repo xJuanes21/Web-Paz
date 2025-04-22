@@ -27,7 +27,7 @@ export default function Labs() {
       }
     },
     hover: {
-      scale: 1.05,
+      scale: 1.1, // Escala moderada al hacer hover
       transition: {
         type: "spring",
         stiffness: 300,
@@ -62,9 +62,9 @@ export default function Labs() {
               <Image
                 src={logo.path}
                 alt={logo.alt}
-                width={100}
-                height={50}
-                className="object-contain max-h-12 filter grayscale hover:grayscale-0 transition-all duration-300"
+                width={130} // 30% más grande (100 * 1.3 = 130)
+                height={65} // 30% más grande (50 * 1.3 = 65)
+                className="object-contain max-h-16 transition-all duration-300" // Eliminé grayscale y aumenté max-h
               />
             </motion.div>
           ))}
@@ -95,9 +95,9 @@ export default function Labs() {
               <Image
                 src={logo.path}
                 alt={logo.alt}
-                width={100}
-                height={50}
-                className="object-contain max-h-12 filter grayscale hover:grayscale-0 transition-all duration-300"
+                width={130} // 30% más grande
+                height={65} // 30% más grande
+                className="object-contain max-h-16 transition-all duration-300" // Eliminé grayscale y aumenté max-h
               />
             </motion.div>
           ))}

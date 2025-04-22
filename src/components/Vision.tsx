@@ -36,12 +36,20 @@ const Vision = () => {
         <div className="flex flex-col md:flex-row">
           {/* Left Image Section */}
           <div className="w-full md:w-1/2 h-80 md:h-auto relative order-2 md:order-1">
+            {/* Mobile Image */}
+            <img 
+              src="/assets/img-oficinas.jpg" 
+              alt="Oficinas Colombo Farmacéutica" 
+              className="object-cover w-full h-full md:hidden"
+            />
+            
+            {/* Desktop Background Image with fixed attachment */}
             <div
-              className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+              className="absolute inset-0 bg-no-repeat bg-center bg-cover hidden md:block"
               style={{
                 backgroundImage: `url('/assets/img-oficinas.jpg')`,
                 backgroundAttachment: 'fixed',
-                backgroundSize: 'cover',
+                backgroundSize: 'contain',
                 backgroundPosition: 'center left'
               }}
               aria-hidden="true"
@@ -77,7 +85,7 @@ const Vision = () => {
                 transition={{ delay: 0.6, duration: 0.5 }}
               >
                 <p>
-                  Colombo Farmacéutica S.A.S será una empresa líder en la distribución de medicamentos farmacéuticos e insumos hospitalarios, para el sector salud; seremos reconocidos por brindar soluciones oportunas a nuestros clientes con calidad, responsabilidad y compromiso.
+                Para el año 2030, Colombo Farmacéutica S.A.S. será reconocida a nivel nacional e internacional como una organización líder en la importación, exportación y distribución de productos farmacéuticos dispositivos médicos, insumos hospitalarios, línea veterinaria y artículos afines, destacada por su compromiso con la calidad, la innovación, la eficiencia operativa y la responsabilidad social, garantizando la satisfacción de nuestros grupos de interés y el cumplimiento de los más altos estándares del sector salud.
                 </p>
               </motion.div>
             </div>

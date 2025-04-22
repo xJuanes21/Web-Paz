@@ -63,24 +63,28 @@ const Mission = () => {
                 transition={{ delay: 0.6, duration: 0.5 }}
               >
                 <p>
-                  Colombo Farmacéutica S.A.S es una empresa que brinda productos farmacéuticos, medicinales,
-                  cosméticos, insumos hospitalarios y artículos de tocador, facilitando soluciones a las
-                  necesidades de la comunidad, con calidad, eficiencia y trabajo en equipo, enfocadas al
-                  bienestar y satisfacción de nuestros clientes, con un equipo humano calificado, responsable y
-                  competente, generando desarrollo económico y social a nuestra región.
+                En Colombo Farmacéutica S.A.S., nos dedicamos a la comercialización, importación, exportación y distribución de productos farmacéuticos, dispositivos médicos, insumos hospitalarios, línea veterinaria y artículos afines, estamos comprometidos con la satisfacción de nuestros clientes mediante el cumplimiento de los requisitos legales y normativos, la mejora continua de nuestros procesos y la excelencia en el servicio nos distingue de los demás, contamos con un equipo humano competente y comprometido con la calidad, orientado al bienestar de la comunidad y al desarrollo sostenible nacional e internacional.
                 </p>
               </motion.div>
             </div>
           </div>
 
-          {/* Right Image Section */}
-          <div className="w-full md:w-1/2 h-80 md:h-auto relative">
+          {/* Right Image Section - Updated for mobile responsiveness */}
+          <div className="w-full md:w-1/2 h-80 md:h-auto relative order-first md:order-last">
+            {/* Mobile Image */}
+            <img 
+              src="/assets/img-bodega.jpg" 
+              alt="Colombo Farmacéutica bodega" 
+              className="object-cover w-full h-full md:hidden"
+            />
+            
+            {/* Desktop Background Image with fixed attachment */}
             <div
-              className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+              className="absolute inset-0 bg-no-repeat bg-center bg-cover hidden md:block"
               style={{
-                backgroundImage: `url('/assets/img-bodega.jpg')`,
+                backgroundImage: `url("/assets/img-bodega.jpg")`,
                 backgroundAttachment: 'fixed',
-                backgroundSize: 'cover',
+                backgroundSize: 'contain',
                 backgroundPosition: 'center right'
               }}
               aria-hidden="true"
