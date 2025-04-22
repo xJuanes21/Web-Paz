@@ -32,13 +32,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${poppins.variable} ${openSans.variable} antialiased`}
       >
         <Navbar />
         {children}
-        <FloatingButtons    />
+        <FloatingButtons />
         <Footer />
       </body>
     </html>
