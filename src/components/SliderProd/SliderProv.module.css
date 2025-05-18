@@ -1,0 +1,36 @@
+/* ProductSlider.module.css */
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-wrapper {
+  display: flex;
+  animation: marquee 60s linear infinite;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  padding: 0 16px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%); /* Desplazar 1/3 del ancho total para crear un ciclo continuo */
+  }
+}
+
+/* Para pausar la animación al hacer hover, si se desea */
+.marquee-container:hover .marquee-wrapper {
+  animation-play-state: paused;
+}
+
+/* Asegura que los elementos dentro del marquee no tengan un ancho excesivo */
+.marquee-item > * {
+  max-width: 200px;
+}

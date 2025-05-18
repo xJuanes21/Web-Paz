@@ -101,10 +101,10 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8 font-open">
-            <a href="#" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="/products" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
-            <a href="#" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+            <a href="/services" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Servicios
             </a>
             <a href="/labs" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
@@ -161,14 +161,14 @@ export default function Navbar() {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 bg-black bg-opacity-95">
               <motion.a
-                href="#"
+                href="/products"
                 className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
                 variants={itemVariants}
               >
                 Productos
               </motion.a>
               <motion.a
-                href="#"
+                href="/services"
                 className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
                 variants={itemVariants}
               >

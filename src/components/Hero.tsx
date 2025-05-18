@@ -35,7 +35,7 @@ export default function Hero() {
         {/* Desktop: parallax real */}
         <div
           className="hidden md:block w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{ backgroundImage: "url('/assets/hero.png')" }}
+          style={{ backgroundImage: "url('/assets/hero.jpg')" }}
         ></div>
       </div>
 

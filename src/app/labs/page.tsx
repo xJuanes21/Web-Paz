@@ -37,19 +37,18 @@ export default function Page() {
   return (
     <div className="w-full pt-15 relative">
       {/* Header con fondo */}
-      <div className="relative py-12 min-h-[40vh] mb-8 overflow-hidden">
-        {/* Mobile parallax con imagen */}
+      <div className="relative py-16 min-h-[60vh] mb-0 overflow-hidden">
+        {/* Fondo con efecto parallax */}
         <div className="block md:hidden w-full h-full absolute inset-0">
           <img
             src="/assets/trama1.png"
             alt="Background pattern"
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover"
             style={{ ...mobileParallaxStyle, opacity: 0.6 }}
           />
         </div>
 
-        {/* Desktop: parallax real con background-attachment: fixed */}
-        <div 
+        <div
           className="hidden md:block absolute inset-0 bg-no-repeat"
           style={{
             backgroundImage: "url('/assets/trama1.png')",
@@ -60,24 +59,24 @@ export default function Page() {
             opacity: 0.5
           }}
         ></div>
-        
-        {/* Overlay para mejorar legibilidad del texto */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/80 from-25% to-[#D4741C]/80 z-10"></div>
-        
 
+        {/* Overlay con degradado */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-[#D4741C]/50 z-10"></div>
 
         {/* Contenido del título */}
-        <div className="relative z-20 container mx-auto px-4">
-          <h1 className='text-4xl text-center text-[#561A16] font-bold mb-4 font-poppins'>
+        <div className="relative z-20 container mx-auto px-4 flex flex-col items-center">
+          <div className="w-20 h-1 bg-[#561A16] mb-6"></div>
+          <h1 className="text-5xl text-center text-[#561A16] font-bold mb-6 font-poppins">
             Nuestros laboratorios
           </h1>
-          <p className='text-lg text-center text-[#561A16] font-open mb-0 '>
-            Conoce nuestros laboratorios, trabajamos con lo mejor de la industria de la salud y el bienestar. <br /> 
+          <p className="text-lg text-center text-[#561A16] font-open max-w-3xl">
+            Conoce nuestros laboratorios, trabajamos con lo mejor de la industria de la salud y el bienestar. 
             Nuestros productos son desarrollados con los mejores estandares de calidad y basados en la ultima investigacion cientifica
           </p>
+          <div className="w-20 h-1 bg-[#561A16] mt-6"></div>
         </div>
       </div>
-      
+
       {/* Resto del contenido */}
       <div className="bg-gradient-to-br from-white via-white  to-orange-600">
         <Labs />

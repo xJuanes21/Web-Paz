@@ -38,7 +38,7 @@ const Vision = () => {
           <div className="w-full md:w-1/2 h-80 md:h-auto relative order-2 md:order-1">
             {/* Mobile Image */}
             <img 
-              src="/assets/IMAGENIA.png" 
+              src="/assets/img-oficinas.jpg" 
               alt="Oficinas Colombo Farmacéutica" 
               className="object-cover w-full h-full md:hidden"
             />
@@ -47,7 +47,7 @@ const Vision = () => {
             <div
               className="absolute inset-0 bg-no-repeat bg-center bg-cover hidden md:block"
               style={{
-                backgroundImage: `url('/assets/IMAGENIA.png')`,
+                backgroundImage: `url('/assets/img-oficinas.jpg')`,
                 backgroundAttachment: 'fixed',
                 backgroundSize: 'contain',
                 backgroundPosition: 'center left'

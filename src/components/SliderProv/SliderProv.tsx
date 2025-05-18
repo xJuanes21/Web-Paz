@@ -23,7 +23,6 @@ export default function SliderProv() {
             <div className="flex overflow-x-auto pt-5 py-4">
                 <div className={styles["marquee-container"]}>
                     <div className={styles["marquee-wrapper"]}>
-                        {/* Duplicar los logos para crear el efecto de scroll sin interrupciones */}
                         {[...logosHumanos, ...logosHumanos, ...logosHumanos].map((logo, index) => (
                             <div key={index} className={styles["marquee-item"]}>
                                 <Link href='/labs'>
