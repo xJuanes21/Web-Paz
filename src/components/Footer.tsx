@@ -1,7 +1,6 @@
 'use client';
 import { MapPin, Phone, Clock } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
@@ -11,18 +10,17 @@ const Footer = () => {
         {/* Sección superior con logo e información de contacto en una sola fila */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 mb-6">
 
-          {/* Logo - Tamaño más reducido y con espacio superior */}
+          {/* Logo - Tamaño aumentado */}
           <div className="w-full md:w-auto flex justify-center md:justify-start mb-6 md:mb-0">
             <Image
-              src="/assets/logo-blanco.png"
+              src="/assets/logohorizontal.png"
               alt="Logo"
-              width={120}
-              height={120}
-              className="h-auto w-24 md:w-32 object-contain"
+              width={180}        // Aumentado de 120 a 180
+              height={180}       // Aumentado de 120 a 180
+              className="h-auto w-40 md:w-48 object-contain"  // Aumentado de w-24 md:w-32 a w-40 md:w-48
               priority
             />
           </div>
-
 
           {/* Información de contacto en fila con separadores verticales */}
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-0">
@@ -32,7 +30,7 @@ const Footer = () => {
                 <MapPin size={18} className="text-white" />
                 <h3 className="font-medium text-sm md:text-base">Contacto</h3>
               </div>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-[#dddddd] mt-1">
                 Carrera 30 #32-15 Av. Gaitán <br />
                 Tuluá, Valle del Cauca
               </p>
@@ -47,7 +45,7 @@ const Footer = () => {
                 <Phone size={18} className="text-white" />
                 <h3 className="font-medium text-sm md:text-base">Línea de Atención</h3>
               </div>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-[#dddddd] mt-1">
                 (602) 231 6022
               </p>
             </div>
@@ -61,7 +59,7 @@ const Footer = () => {
                 <Clock size={18} className="text-white" />
                 <h3 className="font-medium text-sm md:text-base">Horarios</h3>
               </div>
-              <p className="text-xs text-slate-300 mt-1">
+              <p className="text-xs text-[#dddddd] mt-1">
                 Lun-Vie: 7:50am - 12m / 2:00pm - 6:00pm <br />
                 Sab: 7:50am - 1pm
               </p>

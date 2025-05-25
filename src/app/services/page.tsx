@@ -22,26 +22,26 @@ export default function ServiciosAlternativo() {
     {
       id: 1,
       titulo: "Distribución de productos farmacéuticos",
-      descripcion: "Garantizamos la entrega eficiente y segura de productos farmacéuticos a nivel nacional, cumpliendo con todas las normativas y cadenas de frío cuando sea necesario.",
-      icono: "/api/placeholder/80/80"
+      descripcion: "Garantizamos la entrega eficiente y segura de productos farmacéuticos a nivel nacional, cumpliendo con todas las normativas y cadenas de frío cuando sea necesario, colombo farmacéutica SAS cuenta con su propia flota vehicular, llegando de manera oportuna a cualquier lugar del país, nuestros conductores están completamente capacitados para resolver cualquier tipo de situación que pueda presentarse en el trayecto, cada vehículo cuenta con GPS en tiempo real para monitorear el tiempo estimado de entrega y cumplir a cabalidad la ruta programada.",
+       icono: "/assets/distribucion.png"
     },
     {
       id: 2,
       titulo: "Dispensación de medicamentos",
-      descripcion: "Nuestro sistema de dispensación asegura la correcta entrega de medicamentos, con verificación de prescripciones y asesoramiento profesional.",
-      icono: "/api/placeholder/80/80"
+      descripcion: "Nuestro sistema de dispensación asegura la correcta entrega de medicamentos, con verificación de prescripciones y asesoramiento profesional, contamos con un equipo altamente capacitado para cumplir los requerimientos legales vigentes, dentro equipo se encuentra un químico farmacéutico y un regente que están en constante verificación de la ejecución de esta función, capacitando nuestros auxiliares de farmacia y demás personal encargado de llevar a cabo una tarea de tan alta responsabilidad.",
+      icono: "/assets/dispensacion.png"
     },
     {
       id: 3,
       titulo: "Comercialización de medicamentos",
-      descripcion: "Ofrecemos un amplio catálogo de medicamentos de las mejores marcas, con precios competitivos y garantía de originalidad.",
-      icono: "/api/placeholder/80/80"
+      descripcion: "En colombo farmacéutica ofrecemos un amplio catálogo de medicamentos de las mejores marcas, con precios competitivos y garantía de originalidad pues nuestros aliados son laboratorios con reconocimiento a nivel mundial, lo que nos permite asegurar la confiabilidad de los mismos, el área de comercio dentro de nuestra organización presta un servicio de altísima pues nuestros clientes son un pilar fundamental para seguir adelante en nuestro funcionamiento, estamos en búsqueda constante de satisfacer todas sus necesidades.",
+      icono: "/assets/comercializacion.png"
     },
     {
       id: 4,
       titulo: "Insumos médicos y hospitalarios",
-      descripcion: "Proveemos todo tipo de insumos para instituciones médicas y hospitalarias, desde material básico hasta equipamiento especializado.",
-      icono: "/api/placeholder/80/80"
+      descripcion: "Proveemos todo tipo de insumos para instituciones médicas y hospitalarias, desde material básico hasta equipamiento especializado, tenemos dentro de nuestro portafolio una amplia gama de laboratorios reconocidos a nivel mundial, contamos con insumos de papelería y cafetería, odontologia y aseo.",
+      icono: "/assets/insumos.png"
     }
   ];
 
@@ -59,7 +59,7 @@ export default function ServiciosAlternativo() {
           />
         </div>
 
-        <div 
+        <div
           className="hidden md:block absolute inset-0 bg-no-repeat"
           style={{
             backgroundImage: "url('/assets/trama1.png')",
@@ -70,10 +70,10 @@ export default function ServiciosAlternativo() {
             opacity: 0.5
           }}
         ></div>
-        
+
         {/* Overlay con degradado */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-[#D4741C]/50 z-10"></div>
-        
+
         {/* Contenido del título */}
         <div className="relative z-20 container mx-auto px-4 flex flex-col items-center">
           <div className="w-20 h-1 bg-[#561A16] mb-6"></div>
@@ -81,50 +81,67 @@ export default function ServiciosAlternativo() {
             Servicios Farmacéuticos
           </h1>
           <p className="text-lg text-center text-[#561A16] font-open max-w-3xl">
-            Dedicados a ofrecer soluciones completas para el sector salud, mediante servicios farmacéuticos 
+            Dedicados a ofrecer soluciones completas para el sector salud, mediante servicios farmacéuticos
             de alta calidad que cumplen con los más rigurosos estándares de la industria.
           </p>
           <div className="w-20 h-1 bg-[#561A16] mt-6"></div>
         </div>
       </div>
-      
-      
-      
+
+
+
       {/* Contenido de servicios con tabs */}
       <div className="bg-gradient-to-br from-white via-white to-orange-600 py-12">
         <div className="container mx-auto px-4">
           {/* Tabs de navegación */}
-          <div className="flex flex-wrap justify-center mb-12 ">
-            {servicios.map((servicio) => (
-              <button
-                key={servicio.id}
-                onClick={() => setActiveService(servicio.id)}
-                className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${
-                  activeService === servicio.id
+          <div className="mb-12">
+            {/* Versión móvil - grid 2x2 */}
+            <div className="grid grid-cols-2 gap-3 md:hidden px-4">
+              {servicios.map((servicio) => (
+                <button
+                  key={servicio.id}
+                  onClick={() => setActiveService(servicio.id)}
+                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${activeService === servicio.id
                     ? "border-[#D4741C] text-[#561A16]"
                     : "border-transparent text-gray-500 hover:text-[#561A16]"
-                }`}
-              >
-                {servicio.titulo.split(" ")[0]}
-              </button>
-            ))}
+                    }`}
+                >
+                  {servicio.titulo.split(" ")[0]}
+                </button>
+              ))}
+            </div>
+
+            {/* Versión desktop - mantienes el original */}
+            <div className="hidden md:flex flex-wrap justify-center">
+              {servicios.map((servicio) => (
+                <button
+                  key={servicio.id}
+                  onClick={() => setActiveService(servicio.id)}
+                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${activeService === servicio.id
+                    ? "border-[#D4741C] text-[#561A16]"
+                    : "border-transparent text-gray-500 hover:text-[#561A16]"
+                    }`}
+                >
+                  {servicio.titulo.split(" ")[0]}
+                </button>
+              ))}
+            </div>
           </div>
-          
+
           {/* Contenido de servicio activo */}
           {servicios.map((servicio) => (
-            <div 
+            <div
               key={servicio.id}
-              className={`transition-all duration-500 ${
-                activeService === servicio.id ? "opacity-100" : "hidden opacity-0"
-              }`}
+              className={`transition-all duration-500 ${activeService === servicio.id ? "opacity-100" : "hidden opacity-0"
+                }`}
             >
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-                  <div className="bg-[#D4741C]/10 p-4 md:p-8 rounded-lg">
+                  <div className="bg-[#D4741C]/10 rounded-lg overflow-hidden w-full max-w-md mx-auto md:max-w-none">
                     <img
                       src={servicio.icono}
                       alt={servicio.titulo}
-                      className="w-full h-64 object-contain mb-6 p-6"
+                      className="w-full h-80 md:h-96 lg:h-[500px] xl:h-[550px] object-cover"
                     />
                   </div>
                 </div>
@@ -144,9 +161,7 @@ export default function ServiciosAlternativo() {
           ))}
         </div>
       </div>
-      
-      {/* Sección de estadísticas */}
-      
+
     </div>
   );
 }

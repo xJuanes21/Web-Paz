@@ -25,7 +25,7 @@ export default function Hero() {
         {/* Mobile: fondo con parallax simulado */}
         <div className="block md:hidden w-full h-full overflow-hidden">
           <img
-            src="/assets/hero.png"
+            src="/assets/hero.jpg"
             alt="Hero mobile"
             className="w-full h-full object-cover"
             style={mobileParallaxStyle}
@@ -34,7 +34,7 @@ export default function Hero() {
 
         {/* Desktop: parallax real */}
         <div
-          className="hidden md:block w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
+          className="hidden md:block w-full h-full bg-cover  bg-no-repeat bg-fixed"
           style={{ backgroundImage: "url('/assets/hero.jpg')" }}
         ></div>
       </div>

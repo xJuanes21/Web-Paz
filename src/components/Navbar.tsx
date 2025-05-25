@@ -48,18 +48,18 @@ export default function Navbar() {
 
   // Variantes de animación para el menú móvil
   const menuVariants = {
-    closed: { 
+    closed: {
       opacity: 0,
       height: 0,
-      transition: { 
+      transition: {
         duration: 0.3,
-        when: "afterChildren" 
+        when: "afterChildren"
       }
     },
-    open: { 
+    open: {
       opacity: 1,
       height: "auto",
-      transition: { 
+      transition: {
         duration: 0.3,
         when: "beforeChildren",
         staggerChildren: 0.1
@@ -69,13 +69,13 @@ export default function Navbar() {
 
   // Variantes para los elementos del menú
   const itemVariants = {
-    closed: { 
-      opacity: 0, 
+    closed: {
+      opacity: 0,
       y: 20,
       transition: { duration: 0.2 }
     },
-    open: { 
-      opacity: 1, 
+    open: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.2 }
     }
@@ -91,16 +91,19 @@ export default function Navbar() {
       <div className="container px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <div className="h-8 w-32 rounded flex items-center justify-center text-white font-bold">
+          <div className="flex-shrink-0 flex items-center ">
+            <div className="h-8 w-32 rounded flex items-center justify-center text-white font-bold ">
               <Link href="/">
-                <Image src="/assets/logo-colores.png" alt="Logo" width={80} height={80} />
+                <Image src="/assets/logohorizontal.png" alt="Logo" width={150} height={60} />
               </Link>
             </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8 font-open">
+            <a href="/" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              Inicio
+            </a>
             <a href="/products" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
@@ -110,9 +113,7 @@ export default function Navbar() {
             <a href="/labs" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Laboratorios
             </a>
-            <a href="/" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
-              Inicio
-            </a>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -152,7 +153,7 @@ export default function Navbar() {
       {/* Mobile Menu with AnimatePresence */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             className="lg:hidden overflow-hidden"
             variants={menuVariants}
             initial="closed"
@@ -160,6 +161,13 @@ export default function Navbar() {
             exit="closed"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 bg-black bg-opacity-95">
+              <motion.a
+                href="/"
+                className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
+                variants={itemVariants}
+              >
+                Inicio
+              </motion.a>
               <motion.a
                 href="/products"
                 className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
@@ -181,13 +189,7 @@ export default function Navbar() {
               >
                 Laboratorios
               </motion.a>
-              <motion.a
-                href="/"
-                className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
-                variants={itemVariants}
-              >
-                Inicio
-              </motion.a>
+
             </div>
           </motion.div>
         )}
