@@ -148,13 +148,13 @@ export default function ServiciosAlternativo() {
                 <div className="md:w-1/2">
                   <h2 className="text-3xl font-bold text-[#561A16] mb-6">{servicio.titulo}</h2>
                   <p className="text-xl text-gray-700 mb-8">{servicio.descripcion}</p>
-                  <div className="flex items-center">
+                  <div className="flex items-center mb-10">
                     <div className="w-12 h-1 bg-[#D4741C]"></div>
                     <p className="ml-4 text-[#561A16] font-medium">Servicio profesional garantizado</p>
                   </div>
-                  <button className="mt-8 bg-[#561A16] text-white px-8 py-3 rounded-lg hover:bg-[#D4741C] transition-colors duration-300">
+                  <a href='https://wa.me/573173543906' target='_blank' className="mt-8 bg-[#561A16] text-white  px-8 py-3 rounded-lg hover:bg-[#D4741C] transition-colors duration-300">
                     Más información
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
