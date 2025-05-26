@@ -22,15 +22,20 @@ export default function ProductosSection() {
 
       {/* Sliders de productos por categoría */}
       <div>
-        {categorias.map((categoria, index) => (
-          <SliderProd
-            key={categoria.id}
-            productos={productosMap[categoria.id]}
-            titulo={categoria.nombre}
-            colorFondo={categoria.color}
-            urlCategoria="/productos"
-          />
-        ))}
+        {categorias.map((categoria, index) => {
+          // Obtener productos de forma segura usando keyof typeof
+          const productos = productosMap[categoria.id as keyof typeof productosMap] || [];
+          
+          return (
+            <SliderProd
+              key={categoria.id}
+              productos={productos}
+              titulo={categoria.nombre}
+              colorFondo={(categoria as any).color || '#561A16'} // Fallback color si no existe
+              urlCategoria="/productos"
+            />
+          );
+        })}
       </div>
     </div>
   );

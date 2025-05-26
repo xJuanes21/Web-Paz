@@ -9,7 +9,8 @@ export default function CategoriaPage() {
   const [scrollY, setScrollY] = useState(0);
   const [filtroProducto, setFiltroProducto] = useState('');
   
-  const categoriaId = params.categoria as string;
+  // Asegurar que categoriaId sea string
+  const categoriaId = Array.isArray(params.categoria) ? params.categoria[0] : params.categoria;
   
   useEffect(() => {
     const handleScroll = () => {
@@ -27,17 +28,19 @@ export default function CategoriaPage() {
   // Encontrar la categoría actual
   const categoriaActual = categorias.find(cat => cat.id === categoriaId);
   
-  // Obtener productos de la categoría
-  const productosCategoria = productosMap[categoriaId] || [];
+  // Obtener productos de la categoría - manejar undefined
+  const productosCategoria = (categoriaId && productosMap[categoriaId as keyof typeof productosMap]) 
+    ? productosMap[categoriaId as keyof typeof productosMap] 
+    : [];
   
   // Filtrar productos por búsqueda
-  const productosFiltrados = productosCategoria.filter(producto =>
+  const productosFiltrados = productosCategoria.filter((producto: Producto) =>
     producto.nombre.toLowerCase().includes(filtroProducto.toLowerCase()) ||
     (producto.descripcion && producto.descripcion.toLowerCase().includes(filtroProducto.toLowerCase()))
   );
 
   // Si la categoría no existe, redirigir
-  if (!categoriaActual) {
+  if (!categoriaActual || !categoriaId) {
     return (
       <div className="w-full pt-16 min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -52,6 +55,12 @@ export default function CategoriaPage() {
       </div>
     );
   }
+
+  // Función para manejar errores de imagen
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = '/assets/placeholder-product.png';
+  };
 
   return (
     <div className="w-full pt-16 relative">
@@ -77,10 +86,10 @@ export default function CategoriaPage() {
             backgroundRepeat: "no-repeat",
             opacity: 0.5
           }}
-        ></div>
+        />
 
         {/* Overlay con degradado */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-[#D4741C]/50 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-[#D4741C]/50 z-10" />
 
         {/* Contenido del título */}
         <div className="relative z-20 container mx-auto px-4 flex flex-col items-center">
@@ -92,18 +101,18 @@ export default function CategoriaPage() {
             >
               Inicio
             </button>
-            <span>></span>
+            <span>{'>'}</span>
             <button 
               onClick={() => router.push('/products')}
               className="hover:text-[#D4741C] transition-colors"
             >
               Productos
             </button>
-            <span>></span>
+            <span>{'>'}</span>
             <span className="font-medium">{categoriaActual.nombre}</span>
           </div>
 
-          <div className="w-20 h-1 bg-[#561A16] mb-6"></div>
+          <div className="w-20 h-1 bg-[#561A16] mb-6" />
           
           <h1 className="text-4xl text-center text-[#561A16] font-bold mb-6 font-poppins">
             {categoriaActual.nombre}
@@ -114,7 +123,7 @@ export default function CategoriaPage() {
             Encontrarás {productosCategoria.length} productos de alta calidad para satisfacer tus necesidades.
           </p>
           
-          <div className="w-20 h-1 bg-[#561A16] mt-6"></div>
+          <div className="w-20 h-1 bg-[#561A16] mt-6" />
         </div>
       </div>
 
@@ -148,7 +157,7 @@ export default function CategoriaPage() {
           {/* Grid de productos */}
           {productosFiltrados.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {productosFiltrados.map((producto) => (
+              {productosFiltrados.map((producto: Producto) => (
                 <div
                   key={producto.id}
                   className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1"
@@ -159,9 +168,7 @@ export default function CategoriaPage() {
                       src={producto.imagen}
                       alt={producto.nombre}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/assets/placeholder-product.png';
-                      }}
+                      onError={handleImageError}
                     />
                     
                     {/* Overlay en hover */}
