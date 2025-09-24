@@ -86,7 +86,7 @@ export default function Navbar() {
       initial={{ translateY: 0 }}
       animate={{ translateY: isVisible ? 0 : '-100%' }}
       transition={{ duration: 0.3 }}
-      className={`bg-gradient-to-l from-[#561A16] via-[#C6441C] to-[#D4741C] to-white shadow-md fixed w-full z-50`}
+      className={`bg-gradient-to-l from-[#561A16] via-[#C6441C]  to-white shadow-md fixed w-full z-50`}
     >
       <div className="container px-4">
         <div className="flex justify-between items-center h-16">
@@ -110,8 +110,11 @@ export default function Navbar() {
             <a href="/services" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Servicios
             </a>
-            <a href="/labs" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
-              Laboratorios
+            <a href="/PQRS" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              PQRS
+            </a>
+            <a href="/etic" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              Línea Ética
             </a>
 
           </div>
@@ -183,11 +186,18 @@ export default function Navbar() {
                 Servicios
               </motion.a>
               <motion.a
-                href="/labs"
+                href="/PQRS"
                 className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
                 variants={itemVariants}
               >
-                Laboratorios
+                PQRS
+              </motion.a>
+              <motion.a
+                href="/etic"
+                className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
+                variants={itemVariants}
+              >
+                Línea Ética
               </motion.a>
 
             </div>
