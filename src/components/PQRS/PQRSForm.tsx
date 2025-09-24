@@ -17,15 +17,15 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface FormData {
-  tipo: string;
-  nombre: string;
-  telefono: string;
-  email: string;
-  direccion: string;
-  descripcion: string;
-  fechaRecepcion: string;
-  medioRecepcion: string;
-  responsable: string;
+    tipo: string;
+    nombre: string;
+    telefono: string;
+    email: string;
+    direccion: string;
+    descripcion: string;
+    fechaRecepcion: string;
+    medioRecepcion: string;
+    responsable: string;
 }
 
 const PQRSForm = () => {
@@ -166,8 +166,22 @@ const PQRSForm = () => {
         }
     };
 
-    const handleSubmit = () => {
-        console.log('Formulario enviado:', formData);
+    const handleSubmit = async () => {
+        console.log("Formulario enviado:", formData);
+
+        try {
+            const res = await fetch("/api/email/pqrs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+            console.log("Respuesta del servidor:", data);
+        } catch (error) {
+            console.error("Error enviando PQRS:", error);
+        }
+
         setSlideDirection(1);
         setCurrentStep(4);
     };
@@ -212,8 +226,8 @@ const PQRSForm = () => {
                                         transition={{ delay: index * 0.1 }}
                                         onClick={() => handleInputChange('tipo', tipo.id)}
                                         className={`relative p-4 md:p-6 rounded-xl border-2 transition-all duration-200 ${isSelected
-                                                ? 'shadow-lg border-opacity-100'
-                                                : 'border-gray-200 border-opacity-50 bg-white hover:border-gray-300'
+                                            ? 'shadow-lg border-opacity-100'
+                                            : 'border-gray-200 border-opacity-50 bg-white hover:border-gray-300'
                                             }`}
                                         style={{
                                             borderColor: isSelected ? tipo.color : '',
@@ -345,15 +359,15 @@ const PQRSForm = () => {
                                         />
                                     </div>
                                     {fieldConfig.validation !== undefined && formData[fieldConfig.field as keyof FormData] && !fieldConfig.validation
- && (
-                                        <motion.p
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto' }}
-                                            className="text-red-500 text-xs mt-1"
-                                        >
-                                            {fieldConfig.error}
-                                        </motion.p>
-                                    )}
+                                        && (
+                                            <motion.p
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: 'auto' }}
+                                                className="text-red-500 text-xs mt-1"
+                                            >
+                                                {fieldConfig.error}
+                                            </motion.p>
+                                        )}
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -413,7 +427,7 @@ const PQRSForm = () => {
                                 <span className="text-gray-500">Mínimo 20 caracteres</span>
                                 <motion.span
                                     className={`${descripcionLength >= 20 ? 'text-green-600' :
-                                            descripcionLength >= 10 ? 'text-orange-500' : 'text-red-500'
+                                        descripcionLength >= 10 ? 'text-orange-500' : 'text-red-500'
                                         }`}
                                     animate={{ scale: descripcionLength > 0 ? 1.1 : 1 }}
                                 >
@@ -576,8 +590,8 @@ const PQRSForm = () => {
                             >
                                 <motion.div
                                     className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${index <= currentStep
-                                            ? 'bg-orange-600 text-white shadow-lg'
-                                            : 'bg-gray-200 text-gray-500'
+                                        ? 'bg-orange-600 text-white shadow-lg'
+                                        : 'bg-gray-200 text-gray-500'
                                         }`}
                                     animate={{
                                         scale: index === currentStep ? 1.2 : 1
@@ -637,8 +651,8 @@ const PQRSForm = () => {
                     onClick={() => navigateStep(-1)}
                     disabled={currentStep === 0}
                     className={`flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-colors ${currentStep === 0
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                         }`}
                     whileHover={currentStep !== 0 ? { scale: 1.05 } : {}}
                     whileTap={currentStep !== 0 ? { scale: 0.95 } : {}}
@@ -662,8 +676,8 @@ const PQRSForm = () => {
                         onClick={() => navigateStep(1)}
                         disabled={!canProceed()}
                         className={`flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all ${canProceed()
-                                ? 'bg-gradient-to-r from-orange-500 to-red-700 text-white hover:shadow-lg'
-                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                            ? 'bg-gradient-to-r from-orange-500 to-red-700 text-white hover:shadow-lg'
+                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                             }`}
                         whileHover={canProceed() ? { scale: 1.05, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' } : {}}
                         whileTap={canProceed() ? { scale: 0.95 } : {}}

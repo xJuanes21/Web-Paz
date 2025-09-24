@@ -10,18 +10,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const createPQRSEmailTemplate = (data: any = {}) => {
-    const {
-        numeroPQRS = "PQRS-2024-001",
-        tipoPQRS = "PETICIÓN",
-        nombre = "[Nombre del solicitante]",
-        telefono = "[Teléfono]",
-        correo = "[Correo electrónico]",
-        direccion = "[Dirección]",
-        descripcion = "[Descripción de la PQRS]",
-        fechaRecepcion = new Date().toLocaleDateString('es-CO'),
-        medioRecepcion = "CORREO"
-    } = data;
-
     return `
     <!DOCTYPE html>
         <html lang="es">
@@ -71,7 +59,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                     <!-- Tipo de solicitud -->
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Tipo de Solicitud</h3>
-                        <span style="background:#C6441C;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">PETICIÓN</span>
+                        <span style="background:#C6441C;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">${data.tipo}</span>
                     </div>
 
                     <!-- Datos solicitante -->
@@ -81,21 +69,21 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                         <tr>
                             <td style="width:50%;padding:5px;">
                             <strong>Nombre</strong><br>
-                            Juan Pérez
+                            ${data.nombre}
                             </td>
                             <td style="width:50%;padding:5px;">
                             <strong>Teléfono</strong><br>
-                            +57 300 123 4567
+                            ${data.telefono}
                             </td>
                         </tr>
                         <tr>
                             <td style="width:50%;padding:5px;">
                             <strong>Correo</strong><br>
-                            juan.perez@email.com
+                            ${data.email}
                             </td>
                             <td style="width:50%;padding:5px;">
                             <strong>Dirección</strong><br>
-                            Calle 123 #45-67, Bogotá
+                            ${data.direccion}
                             </td>
                         </tr>
                         </table>
@@ -105,7 +93,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Descripción</h3>
                         <div style="border:1px solid #ddd;padding:15px;border-radius:8px;background:#fafafa;font-size:14px;line-height:1.5;">
-                        Solicito información sobre los servicios disponibles y sus respectivos costos.
+                        ${data.descripcion}
                         </div>
                     </div>
 
@@ -116,11 +104,11 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                         <tr>
                             <td style="width:50%;padding:5px;">
                             <strong>Fecha de Recepción</strong><br>
-                            23/09/2025
+                            ${data.fechaRecepcion}
                             </td>
                             <td style="width:50%;padding:5px;">
                             <strong>Medio de Recepción</strong><br>
-                            CORREO ELECTRÓNICO
+                            ${data.medioRecepcion}
                             </td>
                         </tr>
                         </table>
@@ -151,44 +139,33 @@ const createPQRSEmailTemplate = (data: any = {}) => {
 
 export async function POST(request: Request) {
     try {
-        // Aquí puedes extraer los datos del request cuando los tengas
-        // const body = await request.json();
-        // const pqrsData = body.pqrsData;
+        const body = await request.json();
 
-        // Por ahora usamos datos de ejemplo
         const pqrsData = {
+            ...body,
             numeroPQRS: `PQRS-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
-            tipoPQRS: "PETICIÓN",
-            nombre: "Juan Pérez García",
-            telefono: "+57 300 123 4567",
-            correo: "juan.perez@email.com",
-            direccion: "Calle 123 #45-67, Bogotá",
-            descripcion: "Solicito información sobre los servicios disponibles y sus respectivos costos. Estoy interesado en conocer más detalles sobre los planes y beneficios que ofrecen.",
-            fechaRecepcion: new Date().toLocaleDateString('es-CO'),
-            medioRecepcion: "CORREO ELECTRÓNICO"
         };
 
         const mailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: "juanesalazar2004@gmail.com",
+            to: body.email,
             subject: `Confirmación PQRS - ${pqrsData.numeroPQRS}`,
             html: createPQRSEmailTemplate(pqrsData),
         };
 
         await transporter.sendMail(mailOptions);
-        console.log('Correo de confirmación PQRS enviado exitosamente');
+        console.log("Correo de confirmación PQRS enviado exitosamente");
 
         return NextResponse.json({
             status: 201,
-            message: 'PQRS registrada y correo enviado exitosamente',
-            numeroPQRS: pqrsData.numeroPQRS
+            message: "PQRS registrada y correo enviado exitosamente",
+            numeroPQRS: pqrsData.numeroPQRS,
         });
-
     } catch (emailError) {
-        console.error('Error enviando el correo:', emailError);
+        console.error("Error enviando el correo:", emailError);
         return NextResponse.json({
             status: 500,
-            error: 'Error interno del servidor'
+            error: "Error interno del servidor",
         });
     }
 }
