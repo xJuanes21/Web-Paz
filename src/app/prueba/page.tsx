@@ -6,7 +6,7 @@ const page = () => {
 
     const sendEmail = async () => {
         try {
-            const response = await fetch("/api/email", {
+            const response = await fetch("/api/email/pqrs", {
                 method: "POST",
             });
             const data = await response.json();
