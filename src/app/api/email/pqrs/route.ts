@@ -1,5 +1,6 @@
 import { GoogleSheetsService } from "@/lib/googleSheets";
 import { NextResponse } from "next/server";
+import { GoogleSheetsService } from "@/lib/googleSheets";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -10,6 +11,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+<<<<<<< HEAD
 // Instancia del servicio de Google Sheets
 const sheetsService = new GoogleSheetsService(process.env.GOOGLE_SPREADSHEET_ID!);
 
@@ -26,7 +28,11 @@ const createPQRSEmailTemplate = (data: any = {}) => {
         fechaRecepcion = new Date().toLocaleDateString('es-CO'),
         medioRecepcion = "CORREO"
     } = data;
+=======
+const sheetsService = new GoogleSheetsService(process.env.GOOGLE_SPREADSHEET_ID!);
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
 
+const createPQRSEmailTemplate = (data: any = {}) => {
     return `
     <!DOCTYPE html>
         <html lang="es">
@@ -49,44 +55,88 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                 <tr>
                     <td align="center" style="background:#fff;padding:30px;">
                     <img src="https://res.cloudinary.com/dfoinjxgi/image/upload/v1758582140/loguito_r3tws1.png" alt="Logo" width="80" style="margin-bottom:15px;">
-                    <h1 style="color:#2c3e50;font-size:24px;margin:0;">Confirmación de LINEA ETICA</h1>
+                    <h1 style="color:#2c3e50;font-size:24px;margin:0;">Confirmación de PQRS</h1>
                     <p style="color:#7f8c8d;font-size:14px;margin:5px 0 0;">Hemos recibido su solicitud correctamente</p>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding:30px;background:#fff;">
                     <div style="background:#561A16;color:#fff;padding:15px;text-align:center;border-radius:8px;font-weight:bold;margin-bottom:20px;">
+<<<<<<< HEAD
                         N°. PQRS: ${numeroPQRS}
+=======
+                        N°. ${data.numeroPQRS}
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                     </div>
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Tipo de Solicitud</h3>
+<<<<<<< HEAD
                         <span style="background:#C6441C;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">${tipoPQRS}</span>
+=======
+                        <span style="background:#C6441C;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">${data.tipo}</span>
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                     </div>
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Datos del Solicitante</h3>
                         <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
+<<<<<<< HEAD
                             <td style="width:50%;padding:5px;"><strong>Nombre</strong><br>${nombre}</td>
                             <td style="width:50%;padding:5px;"><strong>Teléfono</strong><br>${telefono}</td>
                         </tr>
                         <tr>
                             <td style="width:50%;padding:5px;"><strong>Correo</strong><br>${correo}</td>
                             <td style="width:50%;padding:5px;"><strong>Dirección</strong><br>${direccion}</td>
+=======
+                            <td style="width:50%;padding:5px;">
+                            <strong>Nombre</strong><br>
+                            ${data.nombre}
+                            </td>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Teléfono</strong><br>
+                            ${data.telefono}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Correo</strong><br>
+                            ${data.email}
+                            </td>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Dirección</strong><br>
+                            ${data.direccion}
+                            </td>
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                         </tr>
                         </table>
                     </div>
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Descripción</h3>
                         <div style="border:1px solid #ddd;padding:15px;border-radius:8px;background:#fafafa;font-size:14px;line-height:1.5;">
+<<<<<<< HEAD
                         ${descripcion}
+=======
+                        ${data.descripcion}
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                         </div>
                     </div>
                     <div style="margin-bottom:20px;">
                         <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Información de Registro</h3>
                         <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
+<<<<<<< HEAD
                             <td style="width:50%;padding:5px;"><strong>Fecha de Recepción</strong><br>${fechaRecepcion}</td>
                             <td style="width:50%;padding:5px;"><strong>Medio de Recepción</strong><br>${medioRecepcion}</td>
+=======
+                            <td style="width:50%;padding:5px;">
+                            <strong>Fecha de Recepción</strong><br>
+                            ${data.fechaRecepcion}
+                            </td>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Medio de Recepción</strong><br>
+                            ${data.medioRecepcion}
+                            </td>
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                         </tr>
                         </table>
                     </div>
@@ -97,7 +147,11 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                     <p style="margin:0;"><strong>¡Gracias por contactarnos!</strong></p>
                     <p style="margin:5px 0;">Su solicitud será procesada en los próximos días hábiles.</p>
                     <p style="margin:5px 0;">Recibirá una respuesta en su correo electrónico.</p>
+<<<<<<< HEAD
                     <p style="margin:5px 0;color:#C6441C;font-weight:bold;">Número de referencia: ${numeroPQRS}</p>
+=======
+                    <p style="margin:5px 0;color:#C6441C;font-weight:bold;">Número de referencia: ${data.numeroPQRS}</p>
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
                     </td>
                 </tr>
                 </table>
@@ -110,6 +164,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
 
 export async function POST(request: Request) {
     try {
+<<<<<<< HEAD
         // Extraer datos del request
         const body = await request.json();
         const pqrsData = body.pqrsData || {
@@ -125,6 +180,15 @@ export async function POST(request: Request) {
         };
 
         // Guardar en Google Sheets
+=======
+        const body = await request.json();
+
+        const pqrsData = {
+            ...body,
+            numeroPQRS: `PQRS-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
+        };
+
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
         try {
             await sheetsService.savePQRSRecord(pqrsData);
             console.log('Registro guardado en Google Sheets exitosamente');
@@ -143,10 +207,11 @@ export async function POST(request: Request) {
         };
 
         await transporter.sendMail(mailOptions);
-        console.log('Correo de confirmación PQRS enviado exitosamente');
+        console.log("Correo de confirmación PQRS enviado exitosamente");
 
         return NextResponse.json({
             status: 201,
+<<<<<<< HEAD
             message: 'PQRS registrada, guardada en Google Sheets y correo enviado exitosamente',
             numeroPQRS: pqrsData.numeroPQRS
         });
@@ -175,6 +240,34 @@ export async function GET(request: Request) {
         });
 
     } catch (error) {
+=======
+            message: "PQRS registrada y correo enviado exitosamente",
+            numeroPQRS: pqrsData.numeroPQRS,
+        });
+    } catch (emailError) {
+        console.error("Error enviando el correo:", emailError);
+        return NextResponse.json({
+            status: 500,
+            error: "Error interno del servidor",
+        });
+    }
+}
+
+export async function GET(request: Request) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const year = parseInt(searchParams.get('year') || new Date().getFullYear().toString());
+        const month = parseInt(searchParams.get('month') || (new Date().getMonth() + 1).toString());
+
+        const stats = await sheetsService.getMonthStats(year, month);
+
+        return NextResponse.json({
+            status: 200,
+            data: stats
+        });
+
+    } catch (error) {
+>>>>>>> b2df4f79080aa8c0172adcd66635d466a138076b
         console.error('Error obteniendo estadísticas:', error);
         return NextResponse.json({
             status: 500,

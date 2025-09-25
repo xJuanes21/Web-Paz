@@ -22,6 +22,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const LineaEticaForm = () => {
     const [currentStep, setCurrentStep] = useState(0);
+    const [numberLE, setNumberLE] = useState(0);
     const [slideDirection, setSlideDirection] = useState(0);
     const [formData, setFormData] = useState({
         tipoReporte: '',
@@ -173,8 +174,23 @@ const LineaEticaForm = () => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log('Reporte de línea ética enviado:', formData);
+
+        try {
+            const res = await fetch("/api/email/etic-line", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await res.json();
+            console.log("Respuesta del servidor:", data);
+            setNumberLE(data.numeroLE);
+        } catch (error) {
+            console.error("Error enviando PQRS:", error);
+        }
+
         setSlideDirection(1);
         setCurrentStep(6); // Paso de éxito
     };
@@ -762,7 +778,7 @@ const LineaEticaForm = () => {
                                     color: colorPalette.primary
                                 }}
                             >
-                                LE-{Date.now().toString().slice(-6)}
+                                LE-{numberLE}
                             </motion.div>
                             <p className="text-sm mt-4" style={{ color: colorPalette.muted }}>
                                 Guarda este número para hacer seguimiento
