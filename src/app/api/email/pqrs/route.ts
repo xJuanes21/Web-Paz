@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { GoogleSheetsService } from "@/lib/googleSheets";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -8,6 +9,8 @@ const transporter = nodemailer.createTransport({
         pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
     },
 });
+
+const sheetsService = new GoogleSheetsService(process.env.GOOGLE_SPREADSHEET_ID!);
 
 const createPQRSEmailTemplate = (data: any = {}) => {
     return `
@@ -44,7 +47,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                 <tr>
                     <td align="center" style="background:#fff;padding:30px;">
                     <img src="https://res.cloudinary.com/dfoinjxgi/image/upload/v1758582140/loguito_r3tws1.png" alt="Logo" width="80" style="margin-bottom:15px;">
-                    <h1 style="color:#2c3e50;font-size:24px;margin:0;">Confirmación de LINEA ETICA</h1>
+                    <h1 style="color:#2c3e50;font-size:24px;margin:0;">Confirmación de PQRS</h1>
                     <p style="color:#7f8c8d;font-size:14px;margin:5px 0 0;">Hemos recibido su solicitud correctamente</p>
                     </td>
                 </tr>
@@ -53,7 +56,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                 <tr>
                     <td style="padding:30px;background:#fff;">
                     <div style="background:#561A16;color:#fff;padding:15px;text-align:center;border-radius:8px;font-weight:bold;margin-bottom:20px;">
-                        N°. PQRS: PQRS-2024-001
+                        N°. ${data.numeroPQRS}
                     </div>
 
                     <!-- Tipo de solicitud -->
@@ -122,7 +125,7 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                     <p style="margin:0;"><strong>¡Gracias por contactarnos!</strong></p>
                     <p style="margin:5px 0;">Su solicitud será procesada en los próximos días hábiles.</p>
                     <p style="margin:5px 0;">Recibirá una respuesta en su correo electrónico.</p>
-                    <p style="margin:5px 0;color:#C6441C;font-weight:bold;">Número de referencia: PQRS-2024-001</p>
+                    <p style="margin:5px 0;color:#C6441C;font-weight:bold;">Número de referencia: ${data.numeroPQRS}</p>
                     </td>
                 </tr>
 
@@ -146,9 +149,19 @@ export async function POST(request: Request) {
             numeroPQRS: `PQRS-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
         };
 
+        try {
+            await sheetsService.savePQRSRecord(pqrsData);
+            console.log('Registro guardado en Google Sheets exitosamente');
+        } catch (sheetsError) {
+            console.error('Error guardando en Google Sheets:', sheetsError);
+            // Continuar con el envío del email aunque falle Sheets
+        }
+
+        // Enviar email de confirmación
         const mailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: body.email,
+            to: pqrsData.correo,
+            cc: "juanesalazar2004@gmail.com", // Copia para administrador
             subject: `Confirmación PQRS - ${pqrsData.numeroPQRS}`,
             html: createPQRSEmailTemplate(pqrsData),
         };
@@ -166,6 +179,28 @@ export async function POST(request: Request) {
         return NextResponse.json({
             status: 500,
             error: "Error interno del servidor",
+        });
+    }
+}
+
+export async function GET(request: Request) {
+    try {
+        const { searchParams } = new URL(request.url);
+        const year = parseInt(searchParams.get('year') || new Date().getFullYear().toString());
+        const month = parseInt(searchParams.get('month') || (new Date().getMonth() + 1).toString());
+
+        const stats = await sheetsService.getMonthStats(year, month);
+
+        return NextResponse.json({
+            status: 200,
+            data: stats
+        });
+
+    } catch (error) {
+        console.error('Error obteniendo estadísticas:', error);
+        return NextResponse.json({
+            status: 500,
+            error: 'Error interno del servidor'
         });
     }
 }

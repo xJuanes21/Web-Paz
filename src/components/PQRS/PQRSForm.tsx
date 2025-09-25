@@ -29,6 +29,7 @@ interface FormData {
 }
 
 const PQRSForm = () => {
+    const [numberPQRS, setNumberPQRS] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         tipo: '',
@@ -178,6 +179,7 @@ const PQRSForm = () => {
 
             const data = await res.json();
             console.log("Respuesta del servidor:", data);
+            setNumberPQRS(data.numeroPQRS);
         } catch (error) {
             console.error("Error enviando PQRS:", error);
         }
@@ -549,7 +551,7 @@ const PQRSForm = () => {
                                 transition={{ delay: 0.6, type: "spring" }}
                                 className="text-xl md:text-2xl font-mono font-bold py-2 px-4 rounded border-2 border-orange-500 text-[#561A16]"
                             >
-                                PQRS-{Date.now().toString().slice(-6)}
+                                {numberPQRS.toString().padStart(6, '0')}
                             </motion.div>
                             <p className="text-gray-500 text-xs md:text-sm mt-2">
                                 Guarda este número para hacer seguimiento
