@@ -778,7 +778,7 @@ const LineaEticaForm = () => {
                                     color: colorPalette.primary
                                 }}
                             >
-                                LE-{numberLE}
+                                {numberLE}
                             </motion.div>
                             <p className="text-sm mt-4" style={{ color: colorPalette.muted }}>
                                 Guarda este número para hacer seguimiento

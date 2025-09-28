@@ -1,38 +1,18 @@
-import { NextResponse } from "next/server";
-import { GoogleSheetsService } from "@/lib/googleSheets";
-import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.NEXT_PUBLIC_EMAIL_USER,
-        pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
-    },
-});
 
-const sheetsService = new GoogleSheetsService(process.env.GOOGLE_SPREADSHEET_ID!);
-
-const createPQRSEmailTemplate = (data: any = {}) => {
+// 2. Template de email para Línea Ética
+const createLineaEticaEmailTemplate = (data: any = {}) => {
     return `
     <!DOCTYPE html>
         <html lang="es">
         <head>
         <meta charset="UTF-8">
-        <title>Confirmación LE</title>
+        <title>Confirmación Línea Ética</title>
         <style>
-            /* Media query para móviles */
             @media only screen and (max-width: 600px) {
-            .content {
-                padding: 20px !important;
-            }
-            .form-row {
-                display: block !important;
-            }
-            .form-group {
-                width: 100% !important;
-                display: block !important;
-                margin-bottom: 15px;
-            }
+            .content { padding: 20px !important; }
+            .form-row { display: block !important; }
+            .form-group { width: 100% !important; display: block !important; margin-bottom: 15px; }
             }
         </style>
         </head>
@@ -41,33 +21,85 @@ const createPQRSEmailTemplate = (data: any = {}) => {
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
             <td align="center" style="padding:20px 0;">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:800px;background:linear-gradient(to bottom right,#561A16,#C6441C,#D4741C);border-radius:15px;overflow:hidden;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:800px;background:linear-gradient(to bottom right,#1e3a8a,#3b82f6,#60a5fa);border-radius:15px;overflow:hidden;">
                 
                 <!-- HEADER -->
                 <tr>
                     <td align="center" style="background:#fff;padding:30px;">
                     <img src="https://res.cloudinary.com/dfoinjxgi/image/upload/v1758582140/loguito_r3tws1.png" alt="Logo" width="80" style="margin-bottom:15px;">
-                    <h1 style="color:#2c3e50;font-size:24px;margin:0;">Confirmación de LINEA ETICA</h1>
-                    <p style="color:#7f8c8d;font-size:14px;margin:5px 0 0;">Hemos recibido su solicitud correctamente</p>
+                    <h1 style="color:#1e3a8a;font-size:24px;margin:0;">Confirmación de LÍNEA ÉTICA</h1>
+                    <p style="color:#64748b;font-size:14px;margin:5px 0 0;">Hemos recibido su reporte correctamente</p>
                     </td>
                 </tr>
 
                 <!-- CONTENT -->
                 <tr>
                     <td style="padding:30px;background:#fff;">
-                    <div style="background:#561A16;color:#fff;padding:15px;text-align:center;border-radius:8px;font-weight:bold;margin-bottom:20px;">
+                    <div style="background:#1e3a8a;color:#fff;padding:15px;text-align:center;border-radius:8px;font-weight:bold;margin-bottom:20px;">
                         N°. ${data.numeroLE}
                     </div>
 
-                    <!-- Tipo de solicitud -->
+                    <!-- Tipo de reporte -->
                     <div style="margin-bottom:20px;">
-                        <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Tipo de Solicitud</h3>
-                        <span style="background:#C6441C;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">${data.tipo}</span>
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Tipo de Reporte</h3>
+                        <span style="background:#3b82f6;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;text-transform:uppercase;font-weight:bold;">${data.tipoReporte}</span>
+                        ${data.esAnonimo ? '<span style="background:#ef4444;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;margin-left:10px;">ANÓNIMO</span>' : ''}
                     </div>
 
-                    <!-- Datos solicitante -->
+                    <!-- Información del incidente -->
                     <div style="margin-bottom:20px;">
-                        <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Datos del Solicitante</h3>
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Información del Incidente</h3>
+                        <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Fecha</strong><br>
+                            ${data.fecha}
+                            </td>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Lugar</strong><br>
+                            ${data.lugar}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding:5px;">
+                            <strong>Personas Involucradas</strong><br>
+                            ${data.personas}
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+
+                    <!-- Relación de los hechos -->
+                    <div style="margin-bottom:20px;">
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Relación de los Hechos</h3>
+                        <div style="border:1px solid #e2e8f0;padding:15px;border-radius:8px;background:#f8fafc;font-size:14px;line-height:1.5;">
+                        ${data.relacionHechos}
+                        </div>
+                    </div>
+
+                    ${data.detallesAdicionales ? `
+                    <!-- Detalles adicionales -->
+                    <div style="margin-bottom:20px;">
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Detalles Adicionales</h3>
+                        <div style="border:1px solid #e2e8f0;padding:15px;border-radius:8px;background:#f8fafc;font-size:14px;line-height:1.5;">
+                        ${data.detallesAdicionales}
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    ${data.tienePruebas && data.tienePruebas !== 'No' ? `
+                    <!-- Pruebas -->
+                    <div style="margin-bottom:20px;">
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Pruebas</h3>
+                        <p><strong>Tiene pruebas:</strong> ${data.tienePruebas}</p>
+                        ${data.descripcionPruebas ? `<p><strong>Descripción:</strong> ${data.descripcionPruebas}</p>` : ''}
+                    </div>
+                    ` : ''}
+
+                    ${!data.esAnonimo ? `
+                    <!-- Datos del reportante -->
+                    <div style="margin-bottom:20px;">
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Datos del Reportante</h3>
                         <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="width:50%;padding:5px;">
@@ -75,43 +107,42 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                             ${data.nombre}
                             </td>
                             <td style="width:50%;padding:5px;">
+                            <strong>Cargo</strong><br>
+                            ${data.cargo}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:50%;padding:5px;">
+                            <strong>Área</strong><br>
+                            ${data.area}
+                            </td>
+                            <td style="width:50%;padding:5px;">
                             <strong>Teléfono</strong><br>
                             ${data.telefono}
                             </td>
                         </tr>
                         <tr>
-                            <td style="width:50%;padding:5px;">
-                            <strong>Correo</strong><br>
+                            <td colspan="2" style="padding:5px;">
+                            <strong>Email</strong><br>
                             ${data.email}
-                            </td>
-                            <td style="width:50%;padding:5px;">
-                            <strong>Dirección</strong><br>
-                            ${data.direccion}
                             </td>
                         </tr>
                         </table>
                     </div>
-
-                    <!-- Descripción -->
-                    <div style="margin-bottom:20px;">
-                        <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Descripción</h3>
-                        <div style="border:1px solid #ddd;padding:15px;border-radius:8px;background:#fafafa;font-size:14px;line-height:1.5;">
-                        ${data.descripcion}
-                        </div>
-                    </div>
+                    ` : ''}
 
                     <!-- Información de registro -->
                     <div style="margin-bottom:20px;">
-                        <h3 style="margin:0 0 10px;font-size:16px;color:#2c3e50;">Información de Registro</h3>
+                        <h3 style="margin:0 0 10px;font-size:16px;color:#1e3a8a;">Información de Registro</h3>
                         <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="width:50%;padding:5px;">
-                            <strong>Fecha de Recepción</strong><br>
-                            ${data.fechaRecepcion}
+                            <strong>Fecha de Envío</strong><br>
+                            ${data.fechaEnvio}
                             </td>
                             <td style="width:50%;padding:5px;">
                             <strong>Medio de Recepción</strong><br>
-                            ${data.medioRecepcion}
+                            WEB - LÍNEA ÉTICA
                             </td>
                         </tr>
                         </table>
@@ -121,11 +152,11 @@ const createPQRSEmailTemplate = (data: any = {}) => {
 
                 <!-- FOOTER -->
                 <tr>
-                    <td align="center" style="background:#fff;padding:20px;color:#7f8c8d;font-size:12px;">
-                    <p style="margin:0;"><strong>¡Gracias por contactarnos!</strong></p>
-                    <p style="margin:5px 0;">Su solicitud será procesada en los próximos días hábiles.</p>
-                    <p style="margin:5px 0;">Recibirá una respuesta en su correo electrónico.</p>
-                    <p style="margin:5px 0;color:#C6441C;font-weight:bold;">Número de referencia: ${data.numeroLE}</p>
+                    <td align="center" style="background:#fff;padding:20px;color:#64748b;font-size:12px;">
+                    <p style="margin:0;"><strong>¡Gracias por su confianza!</strong></p>
+                    <p style="margin:5px 0;">Su reporte será evaluado por el equipo correspondiente.</p>
+                    <p style="margin:5px 0;">La confidencialidad y anonimato están garantizados.</p>
+                    <p style="margin:5px 0;color:#3b82f6;font-weight:bold;">Número de referencia: ${data.numeroLE}</p>
                     </td>
                 </tr>
 
@@ -136,46 +167,73 @@ const createPQRSEmailTemplate = (data: any = {}) => {
 
         </body>
     </html>
-
     `;
 };
+
+import { GoogleSheetsLineaEticaService } from "@/lib/googleSheetsLE";
+// 3. Endpoint de Línea Ética
+// src/app/api/linea-etica/route.ts
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.CR_EMAIL_USER,
+        pass: process.env.CR_EMAIL_PASSWORD,
+    },
+});
+
+// Usar un spreadsheet diferente para Línea Ética
+const sheetsService = new GoogleSheetsLineaEticaService(process.env.GOOGLE_SPREADSHEET_ID_LINEA_ETICA!);
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
 
-        const pqrsData = {
+        const lineaEticaData = {
             ...body,
             numeroLE: `LE-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
         };
 
         try {
-            await sheetsService.savePQRSRecord(pqrsData);
-            console.log('Registro guardado en Google Sheets exitosamente');
+            await sheetsService.saveLineaEticaRecord(lineaEticaData);
+            console.log('Registro de Línea Ética guardado en Google Sheets exitosamente');
         } catch (sheetsError) {
             console.error('Error guardando en Google Sheets:', sheetsError);
-            // Continuar con el envío del email aunque falle Sheets
         }
 
-        // Enviar email de confirmación
-        const mailOptions = {
+        // Solo enviar email si no es anónimo o si específicamente se solicita
+        if (!lineaEticaData.esAnonimo && lineaEticaData.email) {
+            const mailOptions = {
+                from: process.env.NEXT_PUBLIC_EMAIL_USER,
+                to: lineaEticaData.email,
+                cc: "juanesalazar2004@gmail.com",
+                subject: `Confirmación Línea Ética - ${lineaEticaData.numeroLE}`,
+                html: createLineaEticaEmailTemplate(lineaEticaData),
+            };
+
+            await transporter.sendMail(mailOptions);
+            console.log("Correo de confirmación Línea Ética enviado exitosamente");
+        }
+
+        // Siempre enviar notificación al administrador
+        const adminMailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: pqrsData.correo,
-            cc: "juanesalazar2004@gmail.com", // Copia para administrador
-            subject: `Confirmación LE - ${pqrsData.numeroLE}`,
-            html: createPQRSEmailTemplate(pqrsData),
+            to: "juanesalazar2004@gmail.com",
+            subject: `Nuevo Reporte Línea Ética - ${lineaEticaData.numeroLE}`,
+            html: createLineaEticaEmailTemplate(lineaEticaData),
         };
 
-        await transporter.sendMail(mailOptions);
-        console.log("Correo de confirmación PQRS enviado exitosamente");
+        await transporter.sendMail(adminMailOptions);
 
         return NextResponse.json({
             status: 201,
-            message: "LE registrada y correo enviado exitosamente",
-            numeroPQRS: pqrsData.numeroLE,
+            message: "Reporte de Línea Ética registrado exitosamente",
+            numeroLE: lineaEticaData.numeroLE,
         });
-    } catch (emailError) {
-        console.error("Error enviando el correo:", emailError);
+    } catch (error) {
+        console.error("Error procesando reporte Línea Ética:", error);
         return NextResponse.json({
             status: 500,
             error: "Error interno del servidor",
@@ -197,10 +255,11 @@ export async function GET(request: Request) {
         });
 
     } catch (error) {
-        console.error('Error obteniendo estadísticas:', error);
+        console.error('Error obteniendo estadísticas de Línea Ética:', error);
         return NextResponse.json({
             status: 500,
             error: 'Error interno del servidor'
         });
     }
 }
+
