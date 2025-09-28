@@ -3,12 +3,10 @@ import { GoogleSheetsService } from "@/lib/googleSheets";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-    service: "smtp.hostinger.com",
-    port: 587,    
-    secure: true,
+    service: "gmail",
     auth: {
-        user: process.env.CR_EMAIL_USER,
-        pass: process.env.CR_EMAIL_PASSWORD,
+        user: process.env.NEXT_PUBLIC_EMAIL_USER,
+        pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
     },
 });
 
@@ -163,7 +161,7 @@ export async function POST(request: Request) {
         const mailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
             to: pqrsData.correo,
-            cc: "juanesalazar2004@gmail.com", // Copia para administrador
+            cc: "calidad.colombofarmaceutica@gmail.com",
             subject: `Confirmación PQRS - ${pqrsData.numeroPQRS}`,
             html: createPQRSEmailTemplate(pqrsData),
         };

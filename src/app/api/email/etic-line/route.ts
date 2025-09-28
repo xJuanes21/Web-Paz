@@ -208,7 +208,7 @@ export async function POST(request: Request) {
             const mailOptions = {
                 from: process.env.NEXT_PUBLIC_EMAIL_USER,
                 to: lineaEticaData.email,
-                cc: "juanesalazar2004@gmail.com",
+                cc: "rutaetica@colombofarmaceutica.com",
                 subject: `Confirmación Línea Ética - ${lineaEticaData.numeroLE}`,
                 html: createLineaEticaEmailTemplate(lineaEticaData),
             };
@@ -221,6 +221,7 @@ export async function POST(request: Request) {
         const adminMailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
             to: "juanesalazar2004@gmail.com",
+            cc: "rutaetica@colombofarmaceutica.com",
             subject: `Nuevo Reporte Línea Ética - ${lineaEticaData.numeroLE}`,
             html: createLineaEticaEmailTemplate(lineaEticaData),
         };
