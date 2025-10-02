@@ -551,7 +551,7 @@ const PQRSForm = () => {
                                 transition={{ delay: 0.6, type: "spring" }}
                                 className="text-xl md:text-2xl font-mono font-bold py-2 px-4 rounded border-2 border-orange-500 text-[#561A16]"
                             >
-                                {numberPQRS.toString().padStart(6, '0')}
+                                {numberPQRS?.toString().padStart(6, '0')}
                             </motion.div>
                             <p className="text-gray-500 text-xs md:text-sm mt-2">
                                 Guarda este número para hacer seguimiento
