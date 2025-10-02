@@ -220,8 +220,7 @@ export async function POST(request: Request) {
         // Siempre enviar notificación al administrador
         const adminMailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: "juanesalazar2004@gmail.com",
-            cc: "rutaetica@colombofarmaceutica.com",
+            to: "rutaetica@colombofarmaceutica.com",
             subject: `Nuevo Reporte Línea Ética - ${lineaEticaData.numeroLE}`,
             html: createLineaEticaEmailTemplate(lineaEticaData),
         };
@@ -263,4 +262,3 @@ export async function GET(request: Request) {
         });
     }
 }
-
