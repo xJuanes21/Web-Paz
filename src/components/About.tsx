@@ -44,7 +44,27 @@ const About = () => {
           />
         </div>
         <p className="text-xl sm:text-2xl mt-4 max-w-4xl mx-auto font-open">
-          {`Somos una empresa familiar 100% vallecaucana con más de 10 años de experiencia en el sector farmacéutico. Nos destacamos por ofrecer productos de excelente calidad y cumplir oportunamente con las entregas, gracias a nuestros procesos consolidados de inventarios y reposiciones. Contamos con un equipo de colaboradores comprometidos con la mejora continua, garantizando un trato cordial, amable y una atención ágil a las necesidades de nuestros clientes.`}
+          {`Somos una empresa familiar
+vallecaucana con más de diez
+años de experiencia en el
+sector salud. Dedicada al
+comercio al por mayor de
+productos farmacéuticos,
+medicinales, quirúrgicos,
+ortopédicos, hospitalarios,
+odontológicos, veterinarios,
+cosméticos y de aseo.
+Destacada por ofrecer
+servicios de alta calidad y
+cumplir oportunamente las
+necesidades del mercado.
+Actualmente con dos líneas de
+distribución: Entidades
+prestadoras de salud y
+Droguerías o farmacias a nivel
+del Valle del Cauca, Antioquia,
+Quindío, Caldas, y Risaralda.
+`}
         </p>
       </motion.div>
 

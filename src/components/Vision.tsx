@@ -37,12 +37,12 @@ const Vision = () => {
           {/* Left Image Section */}
           <div className="w-full md:w-1/2 h-80 md:h-auto relative order-2 md:order-1">
             {/* Mobile Image */}
-            <img 
-              src="/assets/img-oficinas.jpg" 
-              alt="Oficinas Colombo Farmacéutica" 
+            <img
+              src="/assets/img-oficinas.jpg"
+              alt="Oficinas Colombo Farmacéutica"
               className="object-cover w-full h-full md:hidden"
             />
-            
+
             {/* Desktop Background Image with fixed attachment */}
             <div
               className="absolute inset-0 bg-no-repeat bg-center bg-cover hidden md:block"
@@ -85,7 +85,23 @@ const Vision = () => {
                 transition={{ delay: 0.6, duration: 0.5 }}
               >
                 <p>
-                Para el año 2030, Colombo Farmacéutica S.A.S. será reconocida a nivel nacional e internacional como una organización líder en la importación, exportación y distribución de productos farmacéuticos dispositivos médicos, insumos hospitalarios, línea veterinaria y artículos afines, destacada por su compromiso con la calidad, la innovación, la eficiencia operativa y la responsabilidad social, garantizando la satisfacción de nuestros grupos de interés y el cumplimiento de los más altos estándares del sector salud.
+                  Para el año 2030, Colombo
+                  Farmacéutica S.A.S. será reconocida a
+                  nivel nacional e internacional como
+                  una organización líder en la
+                  importación, exportación,
+                  comercialización y distribución de
+                  medicamentos, dispositivos médicos,
+                  cosméticos, productos de aseo, higiene
+                  y limpieza, destinados al consumo y uso
+                  humano y veterinario, destacada por su
+                  compromiso con la calidad, la
+                  innovación, la eficiencia operativa y la
+                  responsabilidad social, garantizando la
+                  satisfacción de nuestros grupos de
+                  interés y el cumplimiento de los más
+                  altos estándares del sector salud.
+
                 </p>
               </motion.div>
             </div>
