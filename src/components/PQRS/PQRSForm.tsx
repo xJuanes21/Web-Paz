@@ -31,6 +31,9 @@ interface FormData {
 const PQRSForm = () => {
     const [numberPQRS, setNumberPQRS] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
     const [formData, setFormData] = useState({
         tipo: '',
         nombre: '',
@@ -168,6 +171,12 @@ const PQRSForm = () => {
     };
 
     const handleSubmit = async () => {
+        // Prevenir múltiples envíos
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+        setSubmitError(false);
+
         console.log("Formulario enviado:", formData);
 
         try {
@@ -179,13 +188,30 @@ const PQRSForm = () => {
 
             const data = await res.json();
             console.log("Respuesta del servidor:", data);
-            setNumberPQRS(data.numeroPQRS);
+
+            if (res.ok) {
+                setNumberPQRS(data.numeroPQRS);
+                setSubmitSuccess(true);
+
+                // Navegar al paso de éxito después de un breve delay
+                setTimeout(() => {
+                    setSlideDirection(1);
+                    setCurrentStep(4);
+                    setIsSubmitting(false);
+                }, 1500);
+            } else {
+                throw new Error(data.error || 'Error en el envío');
+            }
         } catch (error) {
             console.error("Error enviando PQRS:", error);
-        }
+            setSubmitError(true);
+            setIsSubmitting(false);
 
-        setSlideDirection(1);
-        setCurrentStep(4);
+            // Auto-reset del error después de 3 segundos
+            setTimeout(() => {
+                setSubmitError(false);
+            }, 3000);
+        }
     };
 
     const getTipoInfo = () => {
@@ -666,12 +692,29 @@ const PQRSForm = () => {
                 {currentStep === steps.length - 1 ? (
                     <motion.button
                         onClick={handleSubmit}
-                        className="flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-orange-500 to-red-700 text-white rounded-lg font-medium hover:shadow-lg transition-all"
-                        whileHover={{ scale: 1.05, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
-                        whileTap={{ scale: 0.95 }}
+                        disabled={isSubmitting}
+                        className={`flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all ${isSubmitting
+                                ? 'bg-gray-400 text-white cursor-not-allowed'
+                                : 'bg-gradient-to-r from-orange-500 to-red-700 text-white hover:shadow-lg'
+                            }`}
+                        whileHover={!isSubmitting ? { scale: 1.05, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' } : {}}
+                        whileTap={!isSubmitting ? { scale: 0.95 } : {}}
                     >
-                        <Send className="w-4 h-4" />
-                        <span>Enviar PQRS</span>
+                        {isSubmitting ? (
+                            <>
+                                <motion.div
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                    className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                                />
+                                <span>Enviando...</span>
+                            </>
+                        ) : (
+                            <>
+                                <Send className="w-4 h-4" />
+                                <span>Enviar PQRS</span>
+                            </>
+                        )}
                     </motion.button>
                 ) : (
                     <motion.button
