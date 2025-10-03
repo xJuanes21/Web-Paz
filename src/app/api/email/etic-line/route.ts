@@ -26,7 +26,7 @@ const createLineaEticaEmailTemplate = (data: any = {}) => {
                 <!-- HEADER -->
                 <tr>
                     <td align="center" style="background:#fff;padding:30px;">
-                    <img src="https://res.cloudinary.com/dfoinjxgi/image/upload/v1758582140/loguito_r3tws1.png" alt="Logo" width="80" style="margin-bottom:15px;">
+                    <img src="https://res.cloudinary.com/dci3912pp/image/upload/v1759450799/logo-colores_vmforv.png" alt="Logo" width="80" style="margin-bottom:15px;">
                     <h1 style="color:#1e3a8a;font-size:24px;margin:0;">Confirmación de LÍNEA ÉTICA</h1>
                     <p style="color:#64748b;font-size:14px;margin:5px 0 0;">Hemos recibido su reporte correctamente</p>
                     </td>
