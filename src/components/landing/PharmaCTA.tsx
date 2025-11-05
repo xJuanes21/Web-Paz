@@ -1,14 +1,16 @@
 import React from 'react';
 import { AuroraBackground } from '../ui/aurora-background';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function PharmaCTA() {
   return (
-    <AuroraBackground 
+    <AuroraBackground
       className="bg-gradient-to-br from-[#561A16] via-[#C6441C] to-[#D4741C]"
       showRadialGradient={true}
     >
       <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8 px-4 py-20">
- 
+
 
         {/* Main Heading */}
         <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
@@ -22,41 +24,38 @@ export default function PharmaCTA() {
 
         {/* Description */}
         <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-          Descubre nuestra línea de productos farmacéuticos desarrollados con los más altos 
+          Descubre nuestra línea de productos farmacéuticos desarrollados con los más altos
           estándares de calidad y basados en la última investigación científica.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           {/* Primary CTA */}
-          <button className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white text-[#C6441C]">
-            <span className="relative z-10 font-semibold text-lg flex items-center gap-2">
-              Ver Productos
-              <svg 
-                className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-          </button>
+          <Link href="/products">
+            <button className="group relative px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-white text-[#C6441C]">
+              <span className="relative z-10 font-semibold text-lg flex items-center gap-2">
+                Ver Productos
+                <ArrowRight size={20} />
+              </span>
+            </button>
+          </Link>
 
           {/* Secondary CTA */}
-          <button className="group px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-white hover:bg-white/20 transition-all duration-300">
-            <span className="text-white font-semibold text-lg flex items-center gap-2">
-              Conocer Más
-              <svg 
-                className="w-5 h-5 transition-transform duration-300 group-hover:rotate-45" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </button>
+          <Link href="/services">
+            <button className="group px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:border-white hover:bg-white/20 transition-all duration-300">
+              <span className="text-white font-semibold text-lg flex items-center gap-2">
+                Conocer Más
+                <svg
+                  className="w-5 h-5 transition-transform duration-300 group-hover:rotate-45"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </span>
+            </button>
+          </Link>
         </div>
 
         {/* Trust Indicators */}

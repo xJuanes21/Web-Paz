@@ -78,7 +78,7 @@ export default function CorporateValuesBento() {
                             <img
                                 src={values[0].image}
                                 alt={values[0].title}
-                                className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                                className="w-full h-full object-cover opacity-40 group-hover:opacity-30 transition-opacity duration-500"
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-[#561A16]/90 via-[#6B2118]/80 to-[#D4741C]/70" />
                         </div>
@@ -140,7 +140,7 @@ export default function CorporateValuesBento() {
                             <img
                                 src={values[3].image}
                                 alt={values[3].title}
-                                className="w-full h-full object-cover opacity-15 group-hover:opacity-25 transition-opacity duration-500"
+                                className="w-full h-full object-cover opacity-40 group-hover:opacity-25 transition-opacity duration-500"
                             />
                             <div className="absolute inset-0 bg-gradient-to-r from-[#561A16]/95 to-[#D4741C]/60" />
                         </div>

@@ -29,7 +29,7 @@ export default function ServiciosAlternativo() {
       id: 2,
       titulo: "Dispensación de medicamentos",
       descripcion: "Nuestro sistema de dispensación asegura la correcta entrega de medicamentos, con verificación de prescripciones y asesoramiento profesional, contamos con un equipo altamente capacitado para cumplir los requerimientos legales vigentes, dentro equipo se encuentra un químico farmacéutico y un regente que están en constante verificación de la ejecución de esta función, capacitando nuestros auxiliares de farmacia y demás personal encargado de llevar a cabo una tarea de tan alta responsabilidad.",
-      icono: "/assets/dispensacion.png"
+      icono: "/assets/img-estantes.jpg"
     },
     {
       id: 3,

@@ -294,7 +294,7 @@ export function WobbleCardDemo() {
                             <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#561A16] via-[#561A16]/30 to-transparent z-10 md:bg-gradient-to-r md:from-[#561A16]/80 md:via-[#561A16]/20 md:to-transparent"></div>
 
                             <img
-                                src="/assets/img-oficinas.jpg"
+                                src="/assets/img-instalaciones.jpg"
                                 alt="Oficinas Colchico Farmacéutica"
                                 className="w-full h-full object-cover rounded-lg sm:rounded-tl-3xl shadow-xl"
                             />
