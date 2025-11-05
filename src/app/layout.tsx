@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import FloatingButtons from "@/components/FloatingButton";
+import FloatingButtons from "@/components/landing/FloatingButton";
 import Footer from "@/components/Footer";
 
 const poppins = Poppins({

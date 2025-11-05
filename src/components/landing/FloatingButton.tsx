@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Mail, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MessageCircle, Plus } from 'lucide-react';
 
 const FloatingButtons = ({ 
   onWhatsAppClick = () => window.open('https://wa.me/573173543906'), 
@@ -29,7 +29,7 @@ const FloatingButtons = ({
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { type: 'spring', stiffness: 300, damping: 20 }
+      transition: { type: 'spring' as const, stiffness: 300, damping: 20 }
     }
   };
 
@@ -38,7 +38,6 @@ const FloatingButtons = ({
     if (onWhatsAppClick) {
       onWhatsAppClick();
     } else {
-      // Comportamiento predeterminado: abrir WhatsApp con el número proporcionado
       window.open(`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`, '_blank');
     }
   };
@@ -47,7 +46,6 @@ const FloatingButtons = ({
     if (onEmailClick) {
       onEmailClick();
     } else {
-      // Comportamiento predeterminado: abrir el cliente de correo
       window.location.href = `mailto:${email}`;
     }
   };
@@ -56,7 +54,6 @@ const FloatingButtons = ({
     if (onCallClick) {
       onCallClick();
     } else {
-      // Comportamiento predeterminado: iniciar llamada
       window.location.href = `tel:${phoneNumber.replace(/[^0-9]/g, '')}`;
     }
   };
@@ -121,15 +118,27 @@ const FloatingButtons = ({
           )}
         </AnimatePresence>
 
-        {/* Botón principal */}
+        {/* Botón principal con spin effect */}
         <motion.button
           className="bg-[#C6441C] hover:bg-red-700 w-16 h-16 rounded-full shadow-lg focus:outline-none flex items-center justify-center text-white"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => setShowButtons(prev => !prev)} // También permite hacer clic para mostrar/ocultar
+          onClick={() => setShowButtons(prev => !prev)}
           aria-label="Mostrar opciones de contacto"
         >
-          <span className="text-2xl font-bold">+</span>
+          <motion.span 
+            className="text-2xl font-bold"
+            animate={{ 
+              rotate: showButtons ? 45 : 0 
+            }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 260, 
+              damping: 20 
+            }}
+          >
+            <Plus size={24} />
+          </motion.span>
         </motion.button>
       </div>
     </div>

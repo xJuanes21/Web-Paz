@@ -104,6 +104,9 @@ export default function Navbar() {
             <a href="/" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Inicio
             </a>
+            <a href="/about" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
+              Sobre Nosotros
+            </a>
             <a href="/products" className="text-white hover:text-orange-600 px-3 py-2 font-medium transition-colors">
               Productos
             </a>
@@ -170,6 +173,13 @@ export default function Navbar() {
                 variants={itemVariants}
               >
                 Inicio
+              </motion.a>
+              <motion.a
+                href="/about"
+                className="block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-orange-600 hover:bg-black"
+                variants={itemVariants}
+              >
+                Sobre nosotros
               </motion.a>
               <motion.a
                 href="/products"
