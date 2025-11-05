@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,13 +47,13 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   // Variantes de animación para el menú móvil
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
       opacity: 0,
       height: 0,
       transition: {
         duration: 0.3,
-        when: "afterChildren"
+        when: "afterChildren" as const
       }
     },
     open: {
@@ -61,14 +61,14 @@ export default function Navbar() {
       height: "auto",
       transition: {
         duration: 0.3,
-        when: "beforeChildren",
+        when: "beforeChildren" as const,
         staggerChildren: 0.1
       }
     }
   };
 
   // Variantes para los elementos del menú
-  const itemVariants = {
+  const itemVariants: Variants = {
     closed: {
       opacity: 0,
       y: 20,

@@ -1,11 +1,12 @@
 'use client';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
+
 import { logosHumanos, logosVet } from '@/constants/logos';
 
 export default function Labs() {
   // Animaciones para los contenedores
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -16,20 +17,20 @@ export default function Labs() {
   };
 
   // Animaciones para cada logo
-  const logoVariants = {
+  const logoVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100
       }
     },
     hover: {
       scale: 1.1, // Escala moderada al hacer hover
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 300,
         damping: 10
       }

@@ -22,7 +22,7 @@ export const navVariants = {
   
   export const slideIn = (
     direction: 'left' | 'right' | 'up' | 'down',
-    type: string,
+    type: 'spring' | 'tween',
     delay: number,
     duration: number
   ) => ({
@@ -37,7 +37,7 @@ export const navVariants = {
         type,
         delay,
         duration,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   });
@@ -98,7 +98,7 @@ export const navVariants = {
   
   export const fadeIn = (
     direction: 'left' | 'right' | 'up' | 'down',
-    type: string,
+    type: 'spring' | 'tween',
     delay: number,
     duration: number
   ) => ({
@@ -115,7 +115,7 @@ export const navVariants = {
         type,
         delay,
         duration,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   });
@@ -148,7 +148,7 @@ export const navVariants = {
         type: 'tween' as const,
         delay,
         duration,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   });

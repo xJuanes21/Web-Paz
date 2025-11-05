@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+
 import { Phone, Mail, MessageCircle, Plus } from 'lucide-react';
 
 const FloatingButtons = ({ 
@@ -14,7 +15,7 @@ const FloatingButtons = ({
   const [showButtons, setShowButtons] = useState(false);
 
   // Configuración de las variantes de animación
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -23,7 +24,7 @@ const FloatingButtons = ({
     }
   };
 
-  const buttonVariants = {
+  const buttonVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.8 },
     visible: {
       opacity: 1,

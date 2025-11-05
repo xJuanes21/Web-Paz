@@ -14,11 +14,12 @@ import {
     Mail,
     MapPin
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 interface FormData {
     tipo: string;
     nombre: string;
+    identificacion: string;
     telefono: string;
     email: string;
     direccion: string;
@@ -37,6 +38,7 @@ const PQRSForm = () => {
     const [formData, setFormData] = useState({
         tipo: '',
         nombre: '',
+        identificacion: '',
         telefono: '',
         email: '',
         direccion: '',
@@ -47,7 +49,7 @@ const PQRSForm = () => {
     });
 
     // Animaciones
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -58,14 +60,14 @@ const PQRSForm = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
             transition: {
                 duration: 0.5,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         }
     };
@@ -80,7 +82,7 @@ const PQRSForm = () => {
             opacity: 1,
             transition: {
                 duration: 0.4,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         },
         exit: (direction: number) => ({
@@ -161,6 +163,7 @@ const PQRSForm = () => {
                 return formData.tipo !== '';
             case 1:
                 return formData.nombre.trim().length >= 3 &&
+                    formData.identificacion.trim().length >= 5 &&
                     formData.telefono.length >= 7 &&
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
             case 2:
@@ -333,6 +336,15 @@ const PQRSForm = () => {
                                     error: 'El nombre debe tener al menos 3 caracteres'
                                 },
                                 {
+                                    field: 'identificacion',
+                                    label: 'Identificación (NIT o Cédula) *',
+                                    icon: FileText,
+                                    validation: formData.identificacion.trim().length >= 5,
+                                    error: 'Ingresa un NIT o cédula válida',
+                                    transform: (value: string) => value.replace(/[^0-9A-Za-z\-\.]/g, ''),
+                                    maxLength: 20
+                                },
+                                {
                                     field: 'telefono',
                                     label: 'Teléfono *',
                                     icon: Phone,
@@ -381,7 +393,8 @@ const PQRSForm = () => {
                                             }}
                                             placeholder={fieldConfig.field === 'telefono' ? '300 123 4567' :
                                                 fieldConfig.field === 'email' ? 'tu@email.com' :
-                                                    fieldConfig.field === 'nombre' ? 'Tu nombre completo' : 'Dirección completa'}
+                                                    fieldConfig.field === 'nombre' ? 'Tu nombre completo' :
+                                                        fieldConfig.field === 'identificacion' ? 'CC 123456789 o NIT 900123456-7' : 'Dirección completa'}
                                             maxLength={fieldConfig.maxLength}
                                             whileFocus={{ scale: 1.01 }}
                                         />
@@ -477,8 +490,9 @@ const PQRSForm = () => {
                     >
                         <motion.div variants={itemVariants} className="text-center mb-6">
                             <motion.div
-                                initial={{ scale: 0, rotate: -180 }}
-                                animate={{ scale: 1, rotate: 0 }}
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 0.2 }}
                                 className="p-3 rounded-full bg-green-100 inline-flex mb-3"
                             >
                                 <CheckCircle className="w-12 h-12 md:w-14 md:h-14 text-green-500" />
@@ -512,6 +526,11 @@ const PQRSForm = () => {
                                     <p className="text-gray-600">{formData.telefono}</p>
                                     <p className="text-gray-600 text-sm">{formData.email}</p>
                                 </div>
+                            </div>
+
+                            <div className="pt-2">
+                                <h4 className="font-semibold text-gray-900 mb-1">Identificación</h4>
+                                <p className="text-gray-600">{formData.identificacion}</p>
                             </div>
 
                             {formData.direccion && (
