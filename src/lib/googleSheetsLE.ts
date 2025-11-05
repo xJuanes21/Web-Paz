@@ -1,4 +1,3 @@
-
 import { google } from 'googleapis';
 
 const auth = new google.auth.GoogleAuth({
@@ -14,6 +13,36 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
+
+// Tipos para Línea Ética
+export interface LineaEticaData {
+  numeroLE: string;
+  tipoReporte: string;
+  esAnonimo: boolean;
+  fecha: string;
+  lugar: string;
+  personas: string;
+  relacionHechos: string;
+  detallesAdicionales?: string;
+  tienePruebas?: string | boolean;
+  descripcionPruebas?: string;
+  sugerenciaPrevencion?: string;
+  sugerenciaCorreccion?: string;
+  nombre?: string;
+  cargo?: string;
+  area?: string;
+  telefono?: string;
+  email?: string;
+  fechaEnvio: string;
+}
+
+export interface LineaEticaMonthStats {
+  total: number;
+  porTipo: { [key: string]: number };
+  porAnonimo: { anonimos: number; identificados: number };
+  mes?: string;
+  error?: string;
+}
 
 export class GoogleSheetsLineaEticaService {
   private spreadsheetId: string;
@@ -140,7 +169,7 @@ export class GoogleSheetsLineaEticaService {
   }
 
   // Guardar registro de Línea Ética
-  async saveLineaEticaRecord(lineaEticaData: any): Promise<void> {
+  async saveLineaEticaRecord(lineaEticaData: LineaEticaData): Promise<void> {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -187,7 +216,7 @@ export class GoogleSheetsLineaEticaService {
     });
   }
 
-  async getMonthStats(year: number, month: number): Promise<any> {
+  async getMonthStats(year: number, month: number): Promise<LineaEticaMonthStats> {
     const monthNames = [
       'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'

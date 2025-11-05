@@ -18,7 +18,7 @@ import {
     Calendar,
     Users
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
 const LineaEticaForm = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -50,7 +50,7 @@ const LineaEticaForm = () => {
     });
 
     // Animaciones IDÉNTICAS al PQRS
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -61,14 +61,14 @@ const LineaEticaForm = () => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
             y: 0,
             transition: {
                 duration: 0.5,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         }
     };
@@ -83,7 +83,7 @@ const LineaEticaForm = () => {
             opacity: 1,
             transition: {
                 duration: 0.4,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         },
         exit: (direction: number) => ({

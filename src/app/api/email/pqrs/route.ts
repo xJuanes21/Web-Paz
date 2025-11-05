@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { GoogleSheetsService } from "@/lib/googleSheets";
+import { GoogleSheetsService, PQRSData, PQRSMonthStats } from "@/lib/googleSheets";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -12,7 +12,8 @@ const transporter = nodemailer.createTransport({
 
 const sheetsService = new GoogleSheetsService(process.env.GOOGLE_SPREADSHEET_ID!);
 
-const createPQRSEmailTemplate = (data: any = {}) => {
+const createPQRSEmailTemplate = (data: PQRSData) => {
+
     return `
     <!DOCTYPE html>
         <html lang="es">
@@ -75,15 +76,21 @@ const createPQRSEmailTemplate = (data: any = {}) => {
                             ${data.nombre}
                             </td>
                             <td style="width:50%;padding:5px;">
-                            <strong>Teléfono</strong><br>
-                            ${data.telefono}
+                            <strong>Identificación</strong><br>
+                            ${data.identificacion}
                             </td>
                         </tr>
                         <tr>
                             <td style="width:50%;padding:5px;">
+                            <strong>Teléfono</strong><br>
+                            ${data.telefono}
+                            </td>
+                            <td style="width:50%;padding:5px;">
                             <strong>Correo</strong><br>
                             ${data.email}
                             </td>
+                        </tr>
+                        <tr>
                             <td style="width:50%;padding:5px;">
                             <strong>Dirección</strong><br>
                             ${data.direccion}
@@ -144,9 +151,17 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
-        const pqrsData = {
-            ...body,
+        const pqrsData: PQRSData = {
             numeroPQRS: `PQRS-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
+            tipo: body.tipo,
+            fechaRecepcion: body.fechaRecepcion,
+            nombre: body.nombre,
+            identificacion: body.identificacion ?? body.nit ?? body.cedula,
+            telefono: body.telefono,
+            email: body.email ?? body.correo,
+            direccion: body.direccion,
+            descripcion: body.descripcion,
+            medioRecepcion: body.medioRecepcion,
         };
 
         try {
@@ -158,9 +173,9 @@ export async function POST(request: Request) {
         }
 
         // Enviar email de confirmación
-        const mailOptions = {
+        const mailOptions: nodemailer.SendMailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
-            to: pqrsData.correo,
+            to: pqrsData.email,
             cc: "calidad.colombofarmaceutica@gmail.com",
             subject: `Confirmación PQRS - ${pqrsData.numeroPQRS}`,
             html: createPQRSEmailTemplate(pqrsData),
@@ -184,12 +199,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+
     try {
         const { searchParams } = new URL(request.url);
         const year = parseInt(searchParams.get('year') || new Date().getFullYear().toString());
         const month = parseInt(searchParams.get('month') || (new Date().getMonth() + 1).toString());
 
-        const stats = await sheetsService.getMonthStats(year, month);
+        const stats: PQRSMonthStats = await sheetsService.getMonthStats(year, month);
 
         return NextResponse.json({
             status: 200,

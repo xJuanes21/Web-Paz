@@ -1,7 +1,8 @@
 
 
 // 2. Template de email para Línea Ética
-const createLineaEticaEmailTemplate = (data: any = {}) => {
+import { GoogleSheetsLineaEticaService, LineaEticaData, LineaEticaMonthStats } from "@/lib/googleSheetsLE";
+const createLineaEticaEmailTemplate = (data: LineaEticaData) => {
     return `
     <!DOCTYPE html>
         <html lang="es">
@@ -170,7 +171,6 @@ const createLineaEticaEmailTemplate = (data: any = {}) => {
     `;
 };
 
-import { GoogleSheetsLineaEticaService } from "@/lib/googleSheetsLE";
 // 3. Endpoint de Línea Ética
 // src/app/api/linea-etica/route.ts
 import { NextResponse } from "next/server";
@@ -191,9 +191,25 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
-        const lineaEticaData = {
-            ...body,
+        const lineaEticaData: LineaEticaData = {
             numeroLE: `LE-${new Date().getFullYear()}-${String(Date.now()).slice(-3)}`,
+            tipoReporte: body.tipoReporte,
+            esAnonimo: Boolean(body.esAnonimo),
+            fecha: body.fecha,
+            lugar: body.lugar,
+            personas: body.personas,
+            relacionHechos: body.relacionHechos,
+            detallesAdicionales: body.detallesAdicionales,
+            tienePruebas: body.tienePruebas,
+            descripcionPruebas: body.descripcionPruebas,
+            sugerenciaPrevencion: body.sugerenciaPrevencion,
+            sugerenciaCorreccion: body.sugerenciaCorreccion,
+            nombre: body.nombre,
+            cargo: body.cargo,
+            area: body.area,
+            telefono: body.telefono,
+            email: body.email,
+            fechaEnvio: body.fechaEnvio,
         };
 
         try {
@@ -205,7 +221,7 @@ export async function POST(request: Request) {
 
         // Solo enviar email si no es anónimo o si específicamente se solicita
         if (!lineaEticaData.esAnonimo && lineaEticaData.email) {
-            const mailOptions = {
+            const mailOptions: nodemailer.SendMailOptions = {
                 from: process.env.NEXT_PUBLIC_EMAIL_USER,
                 to: lineaEticaData.email,
                 cc: "rutaetica@colombofarmaceutica.com",
@@ -218,7 +234,7 @@ export async function POST(request: Request) {
         }
 
         // Siempre enviar notificación al administrador
-        const adminMailOptions = {
+        const adminMailOptions: nodemailer.SendMailOptions = {
             from: process.env.NEXT_PUBLIC_EMAIL_USER,
             to: "rutaetica@colombofarmaceutica.com",
             subject: `Nuevo Reporte Línea Ética - ${lineaEticaData.numeroLE}`,
@@ -247,7 +263,7 @@ export async function GET(request: Request) {
         const year = parseInt(searchParams.get('year') || new Date().getFullYear().toString());
         const month = parseInt(searchParams.get('month') || (new Date().getMonth() + 1).toString());
 
-        const stats = await sheetsService.getMonthStats(year, month);
+        const stats: LineaEticaMonthStats = await sheetsService.getMonthStats(year, month);
 
         return NextResponse.json({
             status: 200,

@@ -4,16 +4,16 @@ import { CategoryPageView } from '@/components/category/CategoryPageView';
 import { getCategoryData } from '@/lib/utils/categoryUtils';
 
 interface PageProps {
-  params: {
-    categoria: string;
-  };
+  params: Promise<{
+    categoria: string | string[];
+  }>;
 }
 
-export default function CategoriaPage({ params }: PageProps) {
-  // Asegurar que categoriaId sea string
-  const categoriaId = Array.isArray(params.categoria)
-    ? params.categoria[0]
-    : params.categoria;
+export default async function CategoriaPage({ params }: PageProps) {
+  const { categoria } = await params;
+  const categoriaId = Array.isArray(categoria)
+    ? categoria[0]
+    : categoria;
 
   // Obtener datos de la categoría
   const categoryData = getCategoryData(categoriaId);
@@ -34,9 +34,10 @@ export default function CategoriaPage({ params }: PageProps) {
 
 // Opcional: Generar metadata dinámica
 export async function generateMetadata({ params }: PageProps) {
-  const categoriaId = Array.isArray(params.categoria)
-    ? params.categoria[0]
-    : params.categoria;
+  const { categoria } = await params;
+  const categoriaId = Array.isArray(categoria)
+    ? categoria[0]
+    : categoria;
 
   const categoryData = getCategoryData(categoriaId);
 

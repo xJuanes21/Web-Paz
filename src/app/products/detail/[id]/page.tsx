@@ -4,13 +4,14 @@ import { ProductDetailView } from '@/components/product/ProductDetailView';
 import { getProductById, getRelatedProducts } from '@/lib/utils/productUtils';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-export default function ProductDetailPage({ params }: PageProps) {
-    const productId = parseInt(params.id);
+export default async function ProductDetailPage({ params }: PageProps) {
+    const { id } = await params;
+    const productId = parseInt(id, 10);
 
     // Obtener producto por ID
     const product = getProductById(productId);
@@ -33,7 +34,8 @@ export default function ProductDetailPage({ params }: PageProps) {
 
 // Generar metadata dinámica
 export async function generateMetadata({ params }: PageProps) {
-    const productId = parseInt(params.id);
+    const { id } = await params;
+    const productId = parseInt(id, 10);
     const product = getProductById(productId);
 
     if (!product) {

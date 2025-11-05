@@ -1,4 +1,3 @@
-
 import { google } from 'googleapis';
 
 const auth = new google.auth.GoogleAuth({
@@ -14,6 +13,27 @@ const auth = new google.auth.GoogleAuth({
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
+
+// Tipos para PQRS
+export interface PQRSData {
+    numeroPQRS: string;
+    tipo: string;
+    fechaRecepcion: string;
+    nombre: string;
+    identificacion: string; // NIT o Cédula
+    telefono: string;
+    email: string;
+    direccion: string;
+    descripcion: string;
+    medioRecepcion: string;
+}
+
+export interface PQRSMonthStats {
+    total: number;
+    porTipo: { [key: string]: number };
+    mes?: string;
+    error?: string;
+}
 
 export class GoogleSheetsService {
     private spreadsheetId: string;
@@ -74,6 +94,7 @@ export class GoogleSheetsService {
             'Tipo',
             'Fecha Recepción',
             'Nombre',
+            'Identificación',
             'Teléfono',
             'Correo',
             'Dirección',
@@ -85,7 +106,7 @@ export class GoogleSheetsService {
 
         await sheets.spreadsheets.values.update({
             spreadsheetId: this.spreadsheetId,
-            range: `${sheetName}!A1:K1`,
+            range: `${sheetName}!A1:L1`,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [headers],
@@ -135,7 +156,7 @@ export class GoogleSheetsService {
     }
 
     // Guardar registro PQRS
-    async savePQRSRecord(pqrsData: any): Promise<void> {
+    async savePQRSRecord(pqrsData: PQRSData): Promise<void> {
         const date = new Date();
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
@@ -156,6 +177,7 @@ export class GoogleSheetsService {
             pqrsData.tipo,
             pqrsData.fechaRecepcion,
             pqrsData.nombre,
+            pqrsData.identificacion,
             pqrsData.telefono,
             pqrsData.email,
             pqrsData.direccion,
@@ -168,7 +190,7 @@ export class GoogleSheetsService {
         // Insertar datos
         await sheets.spreadsheets.values.append({
             spreadsheetId: this.spreadsheetId,
-            range: `${sheetName}!A:K`,
+            range: `${sheetName}!A:L`,
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [rowData],
@@ -177,7 +199,7 @@ export class GoogleSheetsService {
     }
 
     // Obtener estadísticas del mes
-    async getMonthStats(year: number, month: number): Promise<any> {
+    async getMonthStats(year: number, month: number): Promise<PQRSMonthStats> {
         const monthNames = [
             'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -188,7 +210,7 @@ export class GoogleSheetsService {
         try {
             const response = await sheets.spreadsheets.values.get({
                 spreadsheetId: this.spreadsheetId,
-                range: `${sheetName}!A:K`,
+                range: `${sheetName}!A:L`,
             });
 
             const rows = response.data.values || [];
