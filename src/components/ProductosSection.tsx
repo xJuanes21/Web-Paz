@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import SliderProd from "./SliderProd/SliderProv";
+import SliderProd from "./SliderProd/SliderProd";
 import { categorias, productosMap } from "@/constants/producto";
 
 export default function ProductosSection() {
@@ -31,8 +31,6 @@ export default function ProductosSection() {
               key={categoria.id}
               productos={productos}
               titulo={categoria.nombre}
-              colorFondo={(categoria as any).color || '#561A16'} // Fallback color si no existe
-              urlCategoria="/productos"
             />
           );
         })}

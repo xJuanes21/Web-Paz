@@ -1,8 +1,10 @@
 'use client';
 import { motion } from 'framer-motion';
-import TypingText from './CustomText'; // Asegúrate de tener este componente si lo vas a usar
-import { fadeIn, staggerContainer } from '../utils/utils';
+import TypingText from '../CustomText'; // Asegúrate de tener este componente si lo vas a usar
+import { fadeIn, staggerContainer } from '../../utils/utils';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Search } from 'lucide-react';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,19 +34,21 @@ const About = () => {
       animate={isVisible ? "show" : "hidden"}
       className="relative min-h-[80vh] py-24 bg-transparent text-white"
     >
-      {/* Fondo con gradiente de izquierda a derecha */}
-      <motion.div
-        variants={fadeIn("up", "tween", 0.2, 1)}
-        className="text-center px-4"
-      >
-        <div className="flex justify-center mt-8">
-          <TypingText
-            title="| ¿Quiénes somos?"
-            textStyles="text-center " // Aumenté el tamaño del texto
-          />
-        </div>
-        <p className="text-xl sm:text-2xl mt-4 max-w-4xl mx-auto font-open">
-          {`Somos una empresa familiar
+      <Link href="/about" className="cursor-pointer">
+
+        {/* Fondo con gradiente de izquierda a derecha */}
+        <motion.div
+          variants={fadeIn("up", "tween", 0.2, 1)}
+          className="text-center px-4"
+        >
+          <div className="flex justify-center mt-8">
+            <TypingText
+              title="| ¿Quiénes somos?"
+              textStyles="text-center " // Aumenté el tamaño del texto
+            />
+          </div>
+          <p className="text-xl sm:text-2xl mt-4 max-w-4xl mx-auto font-open">
+            {`Somos una empresa familiar
 vallecaucana con más de diez
 años de experiencia en el
 sector salud. Dedicada al
@@ -65,31 +69,19 @@ Droguerías o farmacias a nivel
 del Valle del Cauca, Antioquia,
 Quindío, Caldas, y Risaralda.
 `}
-        </p>
-      </motion.div>
-
-      {/* Flecha hacia abajo */}
-      <div className="flex justify-center mt-12">
-        <motion.div
-          variants={fadeIn("up", "tween", 0.3, 1)}
-          className="text-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-white animate-bounce"
-          >
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
+          </p>
         </motion.div>
-      </div>
+
+        {/* Flecha hacia abajo */}
+        <div className="flex justify-center mt-12">
+          <motion.div
+            variants={fadeIn("up", "tween", 0.3, 1)}
+            className="text-center"
+          >
+            <Search className="w-10 h-10 text-white hover:scale-110 " />
+          </motion.div>
+        </div>
+      </Link >
     </motion.section>
 
   );
