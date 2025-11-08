@@ -1,9 +1,9 @@
-
 'use client'
 import { useEffect, useState } from "react";
 
 import Mission from "./Mission";
 import Vision from "./Vision";
+import QualityPolicy from "./QualityPolicy";
 import AboutUs from "./AboutUs";
 
  const ComponentPage = () => {
@@ -70,6 +70,7 @@ import AboutUs from "./AboutUs";
                 <AboutUs />
                 <Mission />
                 <Vision />
+                <QualityPolicy />
 
             </div>
 
