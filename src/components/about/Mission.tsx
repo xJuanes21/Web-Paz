@@ -1,6 +1,6 @@
-'use client';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+"use client";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Mission = () => {
   const [isInView, setIsInView] = useState(false);
@@ -12,10 +12,10 @@ const Mission = () => {
           setIsInView(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
-    const element = document.getElementById('mission-section');
+    const element = document.getElementById("mission-section");
     if (element) {
       observer.observe(element);
     }
@@ -63,23 +63,16 @@ const Mission = () => {
                 transition={{ delay: 0.6, duration: 0.5 }}
               >
                 <p>
-                  Comercializar y distribuir
-                  medicamentos, dispositivos médicos,
-                  cosméticos, productos de aseo, higiene
-                  y limpieza, destinados al consumo y uso
-                  humano y veterinario, de manera
-                  segura y eficiente. Comprometidos con
-                  la satisfacción de nuestros clientes
-                  mediante el cumplimiento de los
-                  requisitos legales y normativos. La
-                  mejora continua de nuestros procesos y
-                  la excelencia en el servicio nos
-                  distingue de los demás. Contamos con
-                  un equipo humano competente y
-                  comprometido con la calidad,
-                  orientado al bienestar de la comunidad
-                  y al desarrollo sostenible nacional e
-                  internacional.
+                  Comercializar y distribuir medicamentos, dispositivos médicos,
+                  cosméticos, productos de aseo, higiene y limpieza, destinados
+                  al consumo y uso humano y veterinario, de manera segura y
+                  eficiente. Comprometidos con la satisfacción de nuestros
+                  clientes mediante el cumplimiento de los requisitos legales y
+                  normativos. La mejora continua de nuestros procesos y la
+                  excelencia en el servicio nos distingue de los demás. Contamos
+                  con un equipo humano competente y comprometido con la calidad,
+                  orientado al bienestar de la comunidad y al desarrollo
+                  sostenible nacional e internacional.
                 </p>
               </motion.div>
             </div>
@@ -99,9 +92,9 @@ const Mission = () => {
               className="absolute inset-0 bg-no-repeat bg-center bg-cover hidden md:block"
               style={{
                 backgroundImage: `url("/assets/img-bodega.jpg")`,
-                backgroundAttachment: 'fixed',
-                backgroundSize: 'contain',
-                backgroundPosition: 'center right'
+                backgroundAttachment: "fixed",
+                backgroundSize: "contain",
+                backgroundPosition: "center right",
               }}
               aria-hidden="true"
             />
