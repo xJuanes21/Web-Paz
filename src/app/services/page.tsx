@@ -1,5 +1,5 @@
-'use client';
-import { useState, useEffect } from 'react';
+"use client";
+import { useState, useEffect } from "react";
 
 export default function ServiciosAlternativo() {
   const [scrollY, setScrollY] = useState(0);
@@ -15,34 +15,38 @@ export default function ServiciosAlternativo() {
 
   const mobileParallaxStyle = {
     transform: `translateY(${scrollY * 0.3}px)`,
-    transition: 'transform 0.5s ease-out',
+    transition: "transform 0.5s ease-out",
   };
 
   const servicios = [
     {
       id: 1,
       titulo: "Distribución de productos farmacéuticos",
-      descripcion: "Garantizamos la entrega eficiente y segura de productos farmacéuticos a nivel nacional, cumpliendo con todas las normativas y cadenas de frío cuando sea necesario, colombo farmacéutica SAS cuenta con su propia flota vehicular, llegando de manera oportuna a cualquier lugar del país, nuestros conductores están completamente capacitados para resolver cualquier tipo de situación que pueda presentarse en el trayecto, cada vehículo cuenta con GPS en tiempo real para monitorear el tiempo estimado de entrega y cumplir a cabalidad la ruta programada.",
-       icono: "/assets/distribucion.png"
+      descripcion:
+        "Garantizamos la entrega eficiente y segura de productos farmacéuticos a nivel nacional, cumpliendo con todas las normativas y cadenas de frío cuando sea necesario, colombo farmacéutica SAS cuenta con su propia flota vehicular, llegando de manera oportuna a cualquier lugar del país, nuestros conductores están completamente capacitados para resolver cualquier tipo de situación que pueda presentarse en el trayecto, cada vehículo cuenta con GPS en tiempo real para monitorear el tiempo estimado de entrega y cumplir a cabalidad la ruta programada.",
+      icono: "/assets/image.png",
     },
     {
       id: 2,
       titulo: "Dispensación de medicamentos",
-      descripcion: "Nuestro sistema de dispensación asegura la correcta entrega de medicamentos, con verificación de prescripciones y asesoramiento profesional, contamos con un equipo altamente capacitado para cumplir los requerimientos legales vigentes, dentro equipo se encuentra un químico farmacéutico y un regente que están en constante verificación de la ejecución de esta función, capacitando nuestros auxiliares de farmacia y demás personal encargado de llevar a cabo una tarea de tan alta responsabilidad.",
-      icono: "/assets/img-estantes.jpg"
+      descripcion:
+        "Nuestro sistema de dispensación asegura la correcta entrega de medicamentos, con verificación de prescripciones y asesoramiento profesional, contamos con un equipo altamente capacitado para cumplir los requerimientos legales vigentes, dentro equipo se encuentra un químico farmacéutico y un regente que están en constante verificación de la ejecución de esta función, capacitando nuestros auxiliares de farmacia y demás personal encargado de llevar a cabo una tarea de tan alta responsabilidad.",
+      icono: "/assets/estantes-2026.png",
     },
     {
       id: 3,
       titulo: "Comercialización de medicamentos",
-      descripcion: "En colombo farmacéutica ofrecemos un amplio catálogo de medicamentos de las mejores marcas, con precios competitivos y garantía de originalidad pues nuestros aliados son laboratorios con reconocimiento a nivel mundial, lo que nos permite asegurar la confiabilidad de los mismos, el área de comercio dentro de nuestra organización presta un servicio de altísima pues nuestros clientes son un pilar fundamental para seguir adelante en nuestro funcionamiento, estamos en búsqueda constante de satisfacer todas sus necesidades.",
-      icono: "/assets/comercializacion.png"
+      descripcion:
+        "En colombo farmacéutica ofrecemos un amplio catálogo de medicamentos de las mejores marcas, con precios competitivos y garantía de originalidad pues nuestros aliados son laboratorios con reconocimiento a nivel mundial, lo que nos permite asegurar la confiabilidad de los mismos, el área de comercio dentro de nuestra organización presta un servicio de altísima pues nuestros clientes son un pilar fundamental para seguir adelante en nuestro funcionamiento, estamos en búsqueda constante de satisfacer todas sus necesidades.",
+      icono: "/assets/comercializacion.png",
     },
     {
       id: 4,
       titulo: "Insumos médicos y hospitalarios",
-      descripcion: "Proveemos todo tipo de insumos para instituciones médicas y hospitalarias, desde material básico hasta equipamiento especializado, tenemos dentro de nuestro portafolio una amplia gama de laboratorios reconocidos a nivel mundial, contamos con insumos de papelería y cafetería, odontologia y aseo.",
-      icono: "/assets/insumos.png"
-    }
+      descripcion:
+        "Proveemos todo tipo de insumos para instituciones médicas y hospitalarias, desde material básico hasta equipamiento especializado, tenemos dentro de nuestro portafolio una amplia gama de laboratorios reconocidos a nivel mundial, contamos con insumos de papelería y cafetería, odontologia y aseo.",
+      icono: "/assets/img-bodega.png",
+    },
   ];
 
   return (
@@ -67,7 +71,7 @@ export default function ServiciosAlternativo() {
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            opacity: 0.5
+            opacity: 0.5,
           }}
         ></div>
 
@@ -81,14 +85,13 @@ export default function ServiciosAlternativo() {
             Servicios Farmacéuticos
           </h1>
           <p className="text-lg text-center text-[#561A16] font-open max-w-3xl">
-            Dedicados a ofrecer soluciones completas para el sector salud, mediante servicios farmacéuticos
-            de alta calidad que cumplen con los más rigurosos estándares de la industria.
+            Dedicados a ofrecer soluciones completas para el sector salud,
+            mediante servicios farmacéuticos de alta calidad que cumplen con los
+            más rigurosos estándares de la industria.
           </p>
           <div className="w-20 h-1 bg-[#561A16] mt-6"></div>
         </div>
       </div>
-
-
 
       {/* Contenido de servicios con tabs */}
       <div className="bg-gradient-to-br from-white via-white to-orange-600 py-12">
@@ -101,10 +104,11 @@ export default function ServiciosAlternativo() {
                 <button
                   key={servicio.id}
                   onClick={() => setActiveService(servicio.id)}
-                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${activeService === servicio.id
-                    ? "border-[#D4741C] text-[#561A16]"
-                    : "border-transparent text-gray-500 hover:text-[#561A16]"
-                    }`}
+                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${
+                    activeService === servicio.id
+                      ? "border-[#D4741C] text-[#561A16]"
+                      : "border-transparent text-gray-500 hover:text-[#561A16]"
+                  }`}
                 >
                   {servicio.titulo.split(" ")[0]}
                 </button>
@@ -117,10 +121,11 @@ export default function ServiciosAlternativo() {
                 <button
                   key={servicio.id}
                   onClick={() => setActiveService(servicio.id)}
-                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${activeService === servicio.id
-                    ? "border-[#D4741C] text-[#561A16]"
-                    : "border-transparent text-gray-500 hover:text-[#561A16]"
-                    }`}
+                  className={`px-6 py-4 text-lg font-medium transition-all duration-200 border-b-4 mx-2 mb-2 ${
+                    activeService === servicio.id
+                      ? "border-[#D4741C] text-[#561A16]"
+                      : "border-transparent text-gray-500 hover:text-[#561A16]"
+                  }`}
                 >
                   {servicio.titulo.split(" ")[0]}
                 </button>
@@ -132,8 +137,11 @@ export default function ServiciosAlternativo() {
           {servicios.map((servicio) => (
             <div
               key={servicio.id}
-              className={`transition-all duration-500 ${activeService === servicio.id ? "opacity-100" : "hidden opacity-0"
-                }`}
+              className={`transition-all duration-500 ${
+                activeService === servicio.id
+                  ? "opacity-100"
+                  : "hidden opacity-0"
+              }`}
             >
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
@@ -146,13 +154,23 @@ export default function ServiciosAlternativo() {
                   </div>
                 </div>
                 <div className="md:w-1/2">
-                  <h2 className="text-3xl font-bold text-[#561A16] mb-6">{servicio.titulo}</h2>
-                  <p className="text-xl text-gray-700 mb-8">{servicio.descripcion}</p>
+                  <h2 className="text-3xl font-bold text-[#561A16] mb-6">
+                    {servicio.titulo}
+                  </h2>
+                  <p className="text-xl text-gray-700 mb-8">
+                    {servicio.descripcion}
+                  </p>
                   <div className="flex items-center mb-10">
                     <div className="w-12 h-1 bg-[#D4741C]"></div>
-                    <p className="ml-4 text-[#561A16] font-medium">Servicio profesional garantizado</p>
+                    <p className="ml-4 text-[#561A16] font-medium">
+                      Servicio profesional garantizado
+                    </p>
                   </div>
-                  <a href='https://wa.me/573173543906' target='_blank' className="mt-8 bg-[#561A16] text-white  px-8 py-3 rounded-lg hover:bg-[#D4741C] transition-colors duration-300">
+                  <a
+                    href="https://wa.me/573173543906"
+                    target="_blank"
+                    className="mt-8 bg-[#561A16] text-white  px-8 py-3 rounded-lg hover:bg-[#D4741C] transition-colors duration-300"
+                  >
                     Más información
                   </a>
                 </div>
@@ -161,10 +179,6 @@ export default function ServiciosAlternativo() {
           ))}
         </div>
       </div>
-
     </div>
   );
 }
-
-
-
